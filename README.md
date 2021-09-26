@@ -50,7 +50,7 @@ To get the prototype set up, follow the instructions below
   pipenv run devmode
 ```
 
-## Running Tests
+## Running tests
 
 To run tests, run the following command
 
@@ -59,3 +59,9 @@ To run tests, run the following command
 ```
 
 ...this will run all the unittests in the tests directory
+
+## Dependencies
+
+Runs primarily on [FastAPI](https://github.com/tiangolo/fastapi) with a little help from a couple of other modules 
+
+See the `Pipfile` for a list of all dependencies
