@@ -1,0 +1,13 @@
+{
+   "data": [
+      {
+         "name": "Ole",
+         "price": 0.0,
+         "description": "I AM NOT OLE",
+         "pictures": [
+            "string"
+         ],
+         "id": 277492843392160025
+      }
+   ]
+}
