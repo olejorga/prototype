@@ -1,6 +1,6 @@
 # Prototype
 
-A MVP prototype for a antiques marketplace - part of a group project in SE and testing at HiØ.
+A MVP prototype for a antiques marketplace - part of a group project in SE and testing at HiØ
 
 ## Authors
 
