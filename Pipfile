@@ -8,6 +8,7 @@ fastapi = "*"
 uvicorn = "*"
 aiofiles = "*"
 pysondb = "*"
+jinja2 = "*"
 
 [dev-packages]
 

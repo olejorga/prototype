@@ -16,14 +16,32 @@
 #       * Sivert Østgård
 #
 
-# Importing FastAPI
-from fastapi import FastAPI
+# Importing FastAPI and modules
+from fastapi import FastAPI, Request
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
 
 # Importing routers
 from .routers import items
 
+# Loading template-html-files
+templates = Jinja2Templates(directory="src/templates")
+
 # Initializing FastAPI...
 app = FastAPI()
 
+# Host static files
+app.mount("/static", StaticFiles(directory="src/static"), name="static")
+
 # Initializing routes...
 app.include_router(items.router)
+
+
+@app.get("/", response_class=HTMLResponse)
+async def read_root_view(request: Request):
+    return templates.TemplateResponse(
+        "index.html", {
+            "request": request,
+            "title": "Hjem"
+        })
