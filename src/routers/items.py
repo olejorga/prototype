@@ -12,7 +12,7 @@ templates = Jinja2Templates(directory="src/templates")
 router = APIRouter()
 
 
-@router.get("/items/", tags=["items"], response_class=HTMLResponse)
+@router.get("/items/", response_class=HTMLResponse)
 async def read_items_view(request: Request):
     return templates.TemplateResponse(
         "items.html", {
@@ -22,35 +22,29 @@ async def read_items_view(request: Request):
         })
 
 
-@router.get("/api/items/", tags=["items"], response_model=list[Item])
-async def read_items():
-    return items_db.getAll()
+@router.get("/items/{id}", response_class=HTMLResponse)
+async def read_item_view(id: int, request: Request):
+    return templates.TemplateResponse(
+        "item.html", {
+            "request": request,
+            "title": "Item",
+            "item": items_db.getBy({"id": id})
+        })
 
 
-@router.get("/api/items/{id}", tags=["items"], response_model=Item)
-async def read_item(id: int):
-    return items_db.getBy({"id"})
-
-
-@router.post("/api/items/", tags=["items"])
+@router.post("/api/items/")
 async def create_item(item: Item):
     id = items_db.add(jsonable_encoder(item))
     return id
 
 
-@router.put("/api/items/{id}", tags=["items"])
+@router.put("/api/items/{id}")
 async def replace_item(id: int, item: Item):
     items_db.updateById(id, jsonable_encoder(item))
     return id
 
 
-@router.patch("/api/items/{id}", tags=["items"])
-async def modify_item(id: int, item: dict):
-    items_db.updateById(id, jsonable_encoder(item))
-    return id
-
-
-@router.delete("/api/items/{id}", tags=["items"], )
+@router.delete("/api/items/{id}")
 async def delete_item(id: int):
     id = items_db.deleteById(id)
     return id
