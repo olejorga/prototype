@@ -7,7 +7,6 @@
 
 data/*.json
 data/*.json.lock
-.idea/
 
 ##########
 # Python #
