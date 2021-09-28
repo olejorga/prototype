@@ -28,7 +28,8 @@ async def read_items_view(request: Request):
     return templates.TemplateResponse(
         "items.html", {
             "request": request,
-            "title": "Items"
+            "title": "Items",
+            "items": items_db.getAll()
         })
 
 

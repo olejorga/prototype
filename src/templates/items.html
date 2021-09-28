@@ -1,4 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>Hello {{ title }}!</h1>
+    <section class="section">
+        Dette er items.html
+    </section>
+    <section class="section">
+        Dette er er antikvitetene:
+        <div class="columns">
+            <div class="column">
+                {% for item in items %}
+                    <article class="notification">
+                        {{ item.name }} {{ item.price }}kr
+                    </article>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
 {% endblock %}

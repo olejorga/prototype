@@ -4,41 +4,28 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{ title }}</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
         <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}">
     </head>
     <body class="container">
         <header class="section">
-            <nav class="columns is-vcentered">
+            <div class="columns is-vcentered">
                 <div class="column is-narrow">
-                    <span class="title is-4">Prototype</span>
+                    <span class="title is-4">Logo</span>
                 </div>
-                <div class="column">
-                    <nav class="buttons">
-                        <a href="/" class="button is-light is-warning">
-                            <span class="icon-text">
-                                <span class="icon">
-                                    <ion-icon name="home"></ion-icon>
-                                </span>
-                                <span>Startside</span>
-                            </span>
-                        </a>
-                        <a href="/docs" class="button is-light is-warning">
-                            <span class="icon-text">
-                                <span class="icon">
-                                    <ion-icon name="book"></ion-icon>
-                                </span>
-                                <span>API dokumentasjon</span>
-                            </span>
-                        </a>
-                    </nav>
-                </div>
-            </nav>
+            </div>
         </header>
-        <main class="section">
+        <main class="section pt-0">
             {% block content %}{% endblock %}
         </main>
-        <footer>
-
+        <footer class="section">
+            <div class="content">
+                <p>
+                    <span class="has-text-weight-bold">Logo</span> |
+                    prototype for et antikvitetsmarked
+                </p>
+                <small>Laget av gruppe 21 ved HiØ</small>
+            </div>
         </footer>
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
