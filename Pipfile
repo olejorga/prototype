@@ -9,6 +9,8 @@ uvicorn = "*"
 aiofiles = "*"
 pysondb = "*"
 jinja2 = "*"
+pytest = "*"
+requests = "*"
 
 [dev-packages]
 
@@ -18,4 +20,4 @@ python_version = "3.9"
 [scripts]
 app = "uvicorn src.main:app"
 devmode = "uvicorn src.main:app --reload"
-tests = "python -m unittest discover tests -v"
+tests = "pytest tests"
