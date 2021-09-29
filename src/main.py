@@ -31,7 +31,7 @@ app.mount("/static", StaticFiles(directory="src/static"), name="static")
 app.include_router(items.router)
 
 
-@app.get("/", tags=['root'], response_class=HTMLResponse)
+@app.get("/", tags=['root view'], response_class=HTMLResponse)
 async def read_root_view(request: Request):
     return templates.TemplateResponse(
         "index.html", {
