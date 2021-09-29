@@ -33,7 +33,7 @@ def test_create_item():
     items_db.deleteById(id)
 
 
-def test_replace_item():
+def test_update_item():
     item = Item()
     id = items_db.add(jsonable_encoder(item))
     item.price = 1.0

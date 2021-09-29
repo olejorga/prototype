@@ -39,7 +39,7 @@ async def create_item(item: Item):
 
 
 @router.put("/api/items/{id}")
-async def replace_item(id: int, item: Item):
+async def update_item(id: int, item: Item):
     items_db.updateById(id, jsonable_encoder(item))
     return id
 

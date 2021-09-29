@@ -11,6 +11,7 @@ pysondb = "*"
 jinja2 = "*"
 pytest = "*"
 requests = "*"
+atomicwrites = "*"
 
 [dev-packages]
 
