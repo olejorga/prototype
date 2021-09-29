@@ -12,7 +12,7 @@ templates = Jinja2Templates(directory="src/templates")
 router = APIRouter()
 
 
-@router.get("/items/", response_class=HTMLResponse)
+@router.get("/items/", tags=['items view'], response_class=HTMLResponse)
 async def read_items_view(request: Request):
     return templates.TemplateResponse(
         "items.html", {
@@ -22,7 +22,7 @@ async def read_items_view(request: Request):
         })
 
 
-@router.get("/items/{id}", response_class=HTMLResponse)
+@router.get("/items/{id}", tags=['items view'], response_class=HTMLResponse)
 async def read_item_view(id: int, request: Request):
     return templates.TemplateResponse(
         "item.html", {
@@ -32,19 +32,19 @@ async def read_item_view(id: int, request: Request):
         })
 
 
-@router.post("/api/items/")
+@router.post("/api/items/", tags=['items api'])
 async def create_item(item: Item):
     id = items_db.add(jsonable_encoder(item))
     return id
 
 
-@router.put("/api/items/{id}")
+@router.put("/api/items/{id}", tags=['items api'])
 async def update_item(id: int, item: Item):
     items_db.updateById(id, jsonable_encoder(item))
     return id
 
 
-@router.delete("/api/items/{id}")
+@router.delete("/api/items/{id}", tags=['items api'])
 async def delete_item(id: int):
     id = items_db.deleteById(id)
     return id
