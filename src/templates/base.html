@@ -17,25 +17,30 @@
             <nav class="navbar is-white">
                 <div class="navbar-brand">
                     <a href="/" class="navbar-item is-size-4 has-text-weight-bold">Logo</a>
-                    <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link">
-                            Brukere 
-                        </a>
-                        <div class="navbar-dropdown" >
-                            <a class="navbar-item" href="">
-                                Admin
-                            </a>
-                            <a class="navbar-item" href="">
-                                Forhandler
-                            </a>
-                            <a class="navbar-item" href="">
-                                sluttbruker
-                            </a>
-                        </div>
-                    </div>
+                    <a role="button" class="navbar-burger" data-target="header-navbar">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </a>
                 </div>
                 <div id="header-navbar" class="navbar-menu">
                     <div class="navbar-start">
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <a class="navbar-link">
+                                Endre brukertype
+                            </a>
+                            <div class="navbar-dropdown">
+                                <a class="navbar-item" href="#">
+                                    Plattformeier
+                                </a>
+                                <a class="navbar-item" href="#">
+                                    Forhandler
+                                </a>
+                                <a class="navbar-item" href="#">
+                                    Sluttbruker
+                                </a>
+                            </div>
+                        </div>
                         <a href="/items" class="navbar-item">Antikviteter</a>
                         <a href="#" class="navbar-item">Link 2</a>
                         <a href="#" class="navbar-item">Link 3</a>
