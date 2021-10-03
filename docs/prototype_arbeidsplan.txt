@@ -12,7 +12,7 @@ i slutten av hver sprint.
 
 Det vil være et lengere møte hver mandag, hvor vi gjennomgår forrige sprint og
 planlegger neste sprint. Utover sprinten vil det være korte møter (stand-ups),
-hvor man kan oppdatere hverandre på progresjon og utfordinger.
+hvor man kan oppdatere hverandre på progresjon og utfordringer.
 
 Under hver sprint opprettes det git-brancher for hver arbeidsoppgave (hvis
 arbeidsoppgaven er noe som skal på GitHub). Disse navngis slik:
