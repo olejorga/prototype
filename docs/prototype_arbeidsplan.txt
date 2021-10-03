@@ -72,7 +72,6 @@ Utover dette struktureres hver sprint slik:
               for ytterligere informasjon
 
 
-
     * ONSDAG:
 
         STANDUP
