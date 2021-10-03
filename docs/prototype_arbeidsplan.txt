@@ -1,5 +1,5 @@
 +----------------------------+---------+
-| ARBEIDSPLAN FOR PROTOTYPEN | rev 1.0 |
+| ARBEIDSPLAN FOR PROTOTYPEN | rev 2.0 |
 +----------------------------+---------+
 
 
