@@ -68,6 +68,8 @@ Utover dette struktureres hver sprint slik:
 
             - Skriv kommentarer der koden ikke er lett og forstå
 
+            - Kommunikasjon på GitHub samt commits kan være på norsk
+
             - Utover dette se "Tips til prototypen [...].pdf" (side 3) på canvas
               for ytterligere informasjon
 
