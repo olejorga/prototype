@@ -49,6 +49,16 @@ Utover dette struktureres hver sprint slik:
 
             - Ta utgangspunkt i kravene for å velge funksjonalitet
 
+            - Kravene hentes fra backlog kanban-tavlen under "prosjekter" i
+              GitHub repositoriet
+
+                - Kravene som ikke er påbegynt ligger i "Krav" kolonnen
+
+                - Kravene som arbeides på dras til "Under utvikling" kolonnen
+
+                - Kravene som er fullført (oppfylt basert på tester) dras til
+                  "Ferdig" kolonnen
+
             - Se på filstruktur og navngivning som er gitt fra før og strukturer
               den nye koden basert på det
 
