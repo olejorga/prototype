@@ -1,0 +1,113 @@
++----------------------------+---------+
+| ARBEIDSPLAN FOR PROTOTYPEN | rev 3.0 |
++----------------------------+---------+
+
+
+
+[GENERELT]
+
+Utviklingen av prototypen deles inn i sprinter, hvor hver sprint varer 1 uke.
+Arbeidsoppgavene fordeles i starten av hver sprint og produktet flettes sammen
+i slutten av hver sprint.
+
+Det vil være et lengere møte hver mandag, hvor vi gjennomgår forrige sprint og
+planlegger neste sprint. Utover sprinten vil det være korte møter (stand-ups),
+hvor man kan oppdatere hverandre på progresjon og utfordringer.
+
+Under hver sprint opprettes det git-brancher for hver arbeidsoppgave (hvis
+arbeidsoppgaven er noe som skal på GitHub). Disse navngis slik:
+
+    --> "sprint1/hva_som_skal_lages", hvor "1" refererer til daværende sprint
+
+
+
+[SPRINT STRUKTUR]
+
+Utover dette struktureres hver sprint slik:
+
+    * MANDAG:
+
+        SPRINT REVIEW:
+
+            1. Gjennomgår hva alle har gjort i forrige sprint:
+
+            2. Fletter sammen (merger) alle git-branch'ene og sjekker om det
+               sammensatte produktet fungerer
+
+        SPRINT PLANLEGGING:
+
+            1. Vurderer hva vi bør gjøre videre i neste sprint
+
+            2. Fordele arbeidsoppgaver
+
+            3. Oppretter git-brancher
+
+
+    * TIRSDAG:
+
+        UTVIKLING:
+
+            - Ta utgangspunkt i kravene for å velge funksjonalitet
+
+            - Kravene hentes fra backlog kanban-tavlen under "prosjekter" i
+              GitHub repositoriet
+
+                - Kravene som ikke er påbegynt ligger i "Krav" kolonnen
+
+                - Kravene som arbeides på dras til "Under utvikling" kolonnen
+
+                - Kravene som er fullført (oppfylt basert på tester) dras til
+                  "Ferdig" kolonnen
+
+            - Se på filstruktur og navngivning som er gitt fra før og strukturer
+              den nye koden basert på det
+
+            - Skriv tester basert på hva kravene ber om
+
+            - Skriv kode, kommentarer og docstrings på engelsk
+
+            - Skriv kommentarer der koden ikke er lett og forstå
+
+            - Kommunikasjon på GitHub samt commits kan være på norsk
+
+            - Utover dette se "Tips til prototypen [...].pdf" (side 3) på canvas
+              for ytterligere informasjon
+
+
+    * ONSDAG:
+
+        STANDUP
+
+        UTVIKLING:
+
+            ---- || ----
+
+
+    * TORSDAG:
+
+        UTVIKLING
+
+            ---- || ----
+
+
+    * FREDAG:
+
+        STANDUP
+
+        UTVIKLING
+
+            ---- || ----
+
+
+    * LØRDAG:
+
+        UTVIKLING
+
+            ---- || ----
+
+
+    * SØNDAG:
+
+        UTVIKLING
+
+            ---- || ----
