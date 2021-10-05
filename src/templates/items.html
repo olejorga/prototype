@@ -9,7 +9,7 @@
             <div class="column">
                 {% for item in items %}
                     <article class="notification">
-                        {{ item.name }} {{ item.price }}kr. Varighet: {{ item.auction_time }} dager
+                        {{ item.name }} {{ item.price }}kr. Varighet {{ item.auction_time }} dager.
                         <p>{{ item.description }}</p>
                     </article>
                 {% endfor %}
