@@ -8,6 +8,50 @@ bid_db = db.getDb("data/bids.json")
 
 client = TestClient(app)
 
+
+def test_read_bids_view():
+    res = client.get("/bids/")
+    assert res.status_code == 200
+
+
 def test_read_bid_view():
     res = client.get("/bids/")
     assert res.status_code == 200
+
+
+def test_create_bid():
+    bid = Bid()
+    res = client.post("/api/bids/", json=jsonable_encoder(bid))
+    id = res.json()
+
+    bid_from_db = bid_db.getBy({"id": id})[0]
+    del bid_from_db["id"]
+
+    assert res.status_code == 200
+    assert bid_from_db == jsonable_encoder(bid)
+
+    bid_db.deleteById(id)
+
+
+def test_update_bid():
+    bid = Bid()
+    id = bid_db.add(jsonable_encoder(bid))
+    bid.bid_value = 1.0
+    res = client.put("/api/bids/" + str(id), json=jsonable_encoder(bid))
+
+    bid_from_db = bid_db.getBy({"id": id})[0]
+    del bid_from_db["id"]
+
+    assert res.status_code == 200
+    assert bid_from_db == jsonable_encoder(bid)
+
+    bid_db.deleteById(id)
+
+
+def test_delete_bid():
+    bid = Bid()
+    id = bid_db.add(jsonable_encoder(bid))
+    res = client.delete("/api/bids/" + str(id))
+
+    assert res.status_code == 200
+    assert bid_db.getBy({"id": id}) == []
