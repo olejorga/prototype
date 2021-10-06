@@ -9,7 +9,9 @@
             <div class="column">
                 {% for item in items %}
                     <article class="notification">
-                        {{ item.name }} {{ item.price }}kr
+                        {{ item.name }} {{ item.price }}kr. Varighet {{ item.auction_time }} dager.
+                        <p>{{ item.description }}</p>
+                        <a href="/bids" class="button is-link">Gi buuuud!</a>
                     </article>
                 {% endfor %}
             </div>
