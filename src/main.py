@@ -20,7 +20,7 @@ from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from .routers import items
+from .routers import items, bids
 
 templates = Jinja2Templates(directory="src/templates")
 
@@ -29,6 +29,7 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="src/static"), name="static")
 
 app.include_router(items.router)
+app.include_router(bids.router)
 
 
 @app.get("/", tags=['root view'], response_class=HTMLResponse)
