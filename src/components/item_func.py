@@ -1,17 +1,13 @@
-from time import datetime
+import datetime
 
 
 def countdown(auction_date: datetime):
-    current_date = datetime.now()
+    """
+    Return-type timedelta
+    https://docs.python.org/3/library/datetime.html
+    """
 
-    count = int((auction_date - current_date).total_seconds)
+    current_date = datetime.datetime.now()
 
-    days_remaining = count // 86400
-    hours_remaining = (count-days_remaining * 86400) // 3600
-    minutes_remaining = (count - days_remaining * 86400 - hours_remaining * 3600) // 60
-    seconds_remaining = count - days_remaining * 86400 - hours_remaining * 3600 - minutes_remaining * 60
+    return auction_date - current_date
 
-    string_output = ("{} days, {} hours, {} minutes and {} seconds left of the auction".format(days_remaining, hours_remaining, minutes_remaining, seconds_remaining))
-    
-    return string_output
-  
