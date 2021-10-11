@@ -9,12 +9,7 @@
     </head>
     <body class="container">
         <header class="section">
-            <article class="message is-link">
-                <div class="message-body">
-                    Du ser siden som <strong>forhandler</strong>
-                </div>
-            </article>
-            <nav class="navbar is-white">
+            <nav class="navbar is-white is-transparent">
                 <div class="navbar-brand">
                     <a href="/" class="navbar-item is-size-4 has-text-weight-bold">Logo</a>
                     <a role="button" class="navbar-burger" data-target="header-navbar">
@@ -25,30 +20,28 @@
                 </div>
                 <div id="header-navbar" class="navbar-menu">
                     <div class="navbar-start">
-                        <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link">
-                                Endre brukertype
-                            </a>
-                            <div class="navbar-dropdown">
-                                <a class="navbar-item" href="#">
-                                    Plattformeier
-                                </a>
-                                <a class="navbar-item" href="#">
-                                    Forhandler
-                                </a>
-                                <a class="navbar-item" href="#">
-                                    Sluttbruker
-                                </a>
-                            </div>
-                        </div>
-                        <a href="/items" class="navbar-item">Antikviteter</a>
-                        <a href="#" class="navbar-item">Link 2</a>
-                        <a href="#" class="navbar-item">Link 3</a>
-                        <a href="#" class="navbar-item">Link 4</a>
-                    </div>
-                    <div class="navbar-end">
                         <div class="navbar-item">
-                            <a href="#" class="button is-light is-link">
+                            <a href="/" class="button is-light is-link">
+                                <span class="icon-text">
+                                    <span class="icon">
+                                        <ion-icon name="home"></ion-icon>
+                                    </span>
+                                    <span>Startside</span>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="navbar-item">
+                            <a href="/items" class="button is-light is-warning">
+                                <span class="icon-text">
+                                    <span class="icon">
+                                        <ion-icon name="american-football"></ion-icon>
+                                    </span>
+                                    <span>Antikviteter</span>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="navbar-item">
+                            <a href="#" class="button is-light is-success">
                                 <span class="icon-text">
                                     <span class="icon">
                                         <ion-icon name="add"></ion-icon>
@@ -56,6 +49,33 @@
                                     <span>Ny annonse</span>
                                 </span>
                             </a>
+                        </div>
+                        <div class="navbar-item">
+                            <a href="#" class="button is-light is-primary">
+                                <span class="icon-text">
+                                    <span class="icon">
+                                        <ion-icon name="albums"></ion-icon>
+                                    </span>
+                                    <span>Mine annonser</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="navbar-end">
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <div class="navbar-link">
+                                <span class="icon-text">
+                                    <span class="icon">
+                                        <ion-icon name="log-in-outline"></ion-icon>
+                                    </span>
+                                    <span>Logg inn</span>
+                                </span>
+                            </div>
+                            <div class="navbar-dropdown is-right is-boxed">
+                                <a href="" class="navbar-item">Forhandler</a>
+                                <a href="" class="navbar-item">Plattformeier</a>
+                                <a href="" class="navbar-item">Sluttbruker</a>
+                            </div>
                         </div>
                     </div>
                 </div>
