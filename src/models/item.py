@@ -8,4 +8,4 @@ class Item(BaseModel):
     description: str = ""
     pictures: list[str] = [""]
     auction_time: datetime = datetime.now()
-
+    is_auction: int = 0
