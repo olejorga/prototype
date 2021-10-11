@@ -28,7 +28,7 @@ async def read_item_view(id: int, request: Request):
         "item.html", {
             "request": request,
             "title": "Item",
-            "item": items_db.getBy({"id": id})
+            "item": items_db.getBy({"id": id})[0]
         })
 
 

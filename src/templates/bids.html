@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section class="section">
+        Dette er bids.html
+    </section>
+    <section class="section">
+        Dette er er budene:
+        <div class="columns">
+            <div class="column">
+                {% for bid in bids %}
+                    <article class="notification">
+                        Høyeste bud:{{ bid.bid_value }}<br> itemid:{{ bid.item_id }}
+                    </article>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
