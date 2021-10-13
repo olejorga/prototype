@@ -7,11 +7,13 @@
         Dette er er budene:
         <div class="columns">
             <div class="column">
-                {% for bid in bids %}
+                <ul>
+                {% for bid in bids|reverse %}
                     <article class="notification">
-                        Høyeste bud:{{ bid.bid_value }}<br> itemid:{{ bid.item_id }}
+                        Høyeste bud:{{ bid.bid_value}}<br> itemid:{{ bid.item_id }}
                     </article>
                 {% endfor %}
+                 </ul>
             </div>
         </div>
     </section>
