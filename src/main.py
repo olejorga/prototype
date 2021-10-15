@@ -16,11 +16,14 @@
 #       * Sivert Østgård
 #
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Cookie
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, Response
 from fastapi.templating import Jinja2Templates
-from .routers import items, bids
+from pysondb import db
+from .routers import items, bids, users
+
+users_db = db.getDb("data/users.json")
 
 templates = Jinja2Templates(directory="src/templates")
 
@@ -30,12 +33,26 @@ app.mount("/static", StaticFiles(directory="src/static"), name="static")
 
 app.include_router(items.router)
 app.include_router(bids.router)
+app.include_router(users.router)
 
 
 @app.get("/", tags=['root view'], response_class=HTMLResponse)
-async def read_root_view(request: Request):
+async def read_root_view(request: Request, user_session = Cookie(None)):
+    if user_session is None:
+        user_session = 0
+    
+    user = users_db.getBy({"id": int(user_session)})
+
+    if user == []:
+        user = None
+    else:
+        user = user[0]
+
+    print(user)
+
     return templates.TemplateResponse(
         "index.html", {
             "request": request,
-            "title": "Hjem"
+            "title": "Hjem",
+            "user": user
         })

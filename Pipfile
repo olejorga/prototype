@@ -12,6 +12,7 @@ jinja2 = "*"
 pytest = "*"
 requests = "*"
 atomicwrites = "*"
+python-multipart = "*"
 
 [dev-packages]
 
