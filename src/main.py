@@ -48,8 +48,6 @@ async def read_root_view(request: Request, user_session = Cookie(None)):
     else:
         user = user[0]
 
-    print(user)
-
     return templates.TemplateResponse(
         "index.html", {
             "request": request,
