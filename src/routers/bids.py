@@ -1,9 +1,14 @@
 from fastapi import APIRouter, Request
 from fastapi.encoders import jsonable_encoder
-from pysondb import db
-from starlette.templating import Jinja2Templates
+from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
+
+
+from pysondb import db
+
+
 from ..models.bid import Bid
+
 
 bid_db = db.getDb("data/bids.json")
 
@@ -15,22 +20,20 @@ router = APIRouter()
 # TODO get item id as a variable on each bid.
 @router.get("/bids/", tags=['bids view'], response_class=HTMLResponse)
 async def read_bids_view(request: Request):
-    return templates.TemplateResponse(
-        "bids.html", {
-            "request": request,
-            "title": "bids",
-            "bids": bid_db.getAll()
-        })
+    return templates.TemplateResponse("bids.html", {
+        "request": request,
+        "title": "bids",
+        "bids": bid_db.getAll()
+    })
 
 
 @router.get("/bids/{id}", tags=['bids view'], response_class=HTMLResponse)
 async def read_bid_view(bid_id: int, request: Request):
-    return templates.TemplateResponse(
-        "bids.html", {
-            "request": request,
-            "title": "Bids",
-            "item": bid_db.getBy({"id": bid_id})
-        })
+    return templates.TemplateResponse("bids.html", {
+        "request": request,
+        "title": "Bids",
+        "item": bid_db.getBy({"id": bid_id})
+    })
 
 
 @router.post("/api/bids/", tags=['bids api'])
