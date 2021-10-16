@@ -1,5 +1,5 @@
 #   This is just a...
-
+#
 #   ██████  ██████   ██████  ████████  ██████  ████████ ██    ██ ██████  ███████ 
 #   ██   ██ ██   ██ ██    ██    ██    ██    ██    ██     ██  ██  ██   ██ ██      
 #   ██████  ██████  ██    ██    ██    ██    ██    ██      ████   ██████  █████   
@@ -20,8 +20,13 @@ from fastapi import FastAPI, Request, Cookie
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse, Response
 from fastapi.templating import Jinja2Templates
+
+
 from pysondb import db
+
+
 from .routers import items, bids, users
+
 
 users_db = db.getDb("data/users.json")
 

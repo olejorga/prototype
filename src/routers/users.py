@@ -2,8 +2,14 @@ from fastapi import APIRouter, Request, Form, status, HTTPException
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import HTMLResponse, Response, RedirectResponse
 from fastapi.templating import Jinja2Templates
+
+
 from pysondb import db
+
+
 from ..models.user import User
+
+
 
 users_db = db.getDb("data/users.json")
 

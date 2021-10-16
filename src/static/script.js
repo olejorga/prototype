@@ -9,6 +9,7 @@ burgers.forEach(burger => {
     });
 });
 
+
 var fakeLoginBtns = document.querySelectorAll(".fake-login-btn");
 
 fakeLoginBtns.forEach(fakeLoginBtn => {
