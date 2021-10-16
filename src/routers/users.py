@@ -40,14 +40,4 @@ async def logout_user(response: Response):
 @router.post("/api/users/", tags=['users api'])
 async def create_user(user: User):
     id = users_db.add(jsonable_encoder(user))
-    return id  
-
-
-#   @router.get("/items/{id}", tags=['items view'], response_class=HTMLResponse)
-#   async def read_item_view(id: int, request: Request):
-#       return templates.TemplateResponse(
-#           "item.html", {
-#               "request": request,
-#               "title": "Item",
-#              "item": items_db.getBy({"id": id})[0]
-#          })
+    return id
