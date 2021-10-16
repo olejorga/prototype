@@ -9,12 +9,12 @@ items_db = db.getDb("data/items.json")
 client = TestClient(app)
 
 
-def test_read_items_view():
+def test_show_items_view():
     res = client.get("/items/")
     assert res.status_code == 200
 
 
-def test_read_item_view():
+def test_show_item_view():
     res = client.get("/items/")
     assert res.status_code == 200
 

@@ -40,6 +40,7 @@
                                 </span>
                             </a>
                         </div>
+                        {% if user and (user["role"] == "SELLER" or user["role"] == "PLATFORM_OWNER") %}
                         <div class="navbar-item">
                             <a href="#" class="button is-light is-success">
                                 <span class="icon-text">
@@ -60,23 +61,47 @@
                                 </span>
                             </a>
                         </div>
+                        {% endif %}
                     </div>
                     <div class="navbar-end">
-                        <div class="navbar-item has-dropdown is-hoverable">
-                            <div class="navbar-link">
-                                <span class="icon-text">
-                                    <span class="icon">
-                                        <ion-icon name="log-in-outline"></ion-icon>
+                        {% if user %}
+                            <div class="navbar-item has-dropdown is-hoverable">
+                                <div class="navbar-link">
+                                    <span class="icon-text">
+                                        <span class="icon">
+                                            <ion-icon name="person-outline"></ion-icon>
+                                        </span>
+                                        <span>{{ user.username }}</span>
                                     </span>
-                                    <span>Logg inn</span>
-                                </span>
+                                </div>
+                                <div class="navbar-dropdown is-right is-boxed">
+                                    <a href="/api/users/logout" class="navbar-item">
+                                        <span class="icon-text">
+                                            <span class="icon">
+                                                <ion-icon name="log-out-outline"></ion-icon>
+                                            </span>
+                                            <span>Logg ut</span>
+                                        </span>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="navbar-dropdown is-right is-boxed">
-                                <a href="" class="navbar-item">Forhandler</a>
-                                <a href="" class="navbar-item">Plattformeier</a>
-                                <a href="" class="navbar-item">Sluttbruker</a>
+                        {% else %}
+                            <div class="navbar-item has-dropdown is-hoverable">
+                                <div class="navbar-link">
+                                    <span class="icon-text">
+                                        <span class="icon">
+                                            <ion-icon name="log-in-outline"></ion-icon>
+                                        </span>
+                                        <span>Logg inn</span>
+                                    </span>
+                                </div>
+                                <div class="navbar-dropdown is-right is-boxed">
+                                    <a class="navbar-item fake-login-btn" data-target="SELLER">Forhandler</a>
+                                    <a class="navbar-item fake-login-btn" data-target="PLATFORM_OWNER">Plattformeier</a>
+                                    <a class="navbar-item fake-login-btn" data-target="END_USER">Sluttbruker</a>
+                                </div>
                             </div>
-                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </nav>
