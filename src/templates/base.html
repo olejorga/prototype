@@ -63,14 +63,16 @@
                             </div>
                         </div>
                         <div class="navbar-item control">
-                            <div class="field has-addons">
-                            <div class="control has-icons-left">
-                                <input type="text" class="input is-info" placeholder="skriv her..">
-                            </div>
-                                <div class="control">
-                                    <a class="button is-info">Søk</a>
+                            <form action="/search_result" method="get">
+                                <div class="field has-addons">
+                                    <div class="control has-icons-left">
+                                        <input type="text" name="search_input" class="input is-info" placeholder="skriv her..">
+                                    </div>
+                                    <div class="control">
+                                        <button type="submit" class="button is-info">Søk</button>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                     <div class="navbar-end">
