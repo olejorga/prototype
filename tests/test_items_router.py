@@ -9,17 +9,17 @@ items_db = db.getDb("data/items.json")
 client = TestClient(app)
 
 
-def test_read_items_view():
+def test_show_view_of_all_items():
     res = client.get("/items/")
     assert res.status_code == 200
 
 
-def test_read_item_view():
+def test_show_view_of_specific_item():
     res = client.get("/items/")
     assert res.status_code == 200
 
 
-def test_create_item():
+def test_create_and_add_new_item_to_database():
     item = Item()
     res = client.post("/api/items/", json=jsonable_encoder(item))
     id = res.json()
@@ -33,7 +33,7 @@ def test_create_item():
     items_db.deleteById(id)
 
 
-def test_update_item():
+def test_update_existing_item_in_database():
     item = Item()
     id = items_db.add(jsonable_encoder(item))
     item.price = 1.0
@@ -48,7 +48,7 @@ def test_update_item():
     items_db.deleteById(id)
 
 
-def test_delete_item():
+def test_delete_item_from_database():
     item = Item()
     id = items_db.add(jsonable_encoder(item))
     res = client.delete("/api/items/" + str(id))
