@@ -20,45 +20,59 @@
                 </div>
                 <div id="header-navbar" class="navbar-menu">
                     <div class="navbar-start">
-                        <div class="navbar-item">
-                            <a href="/" class="button is-light is-link">
-                                <span class="icon-text">
-                                    <span class="icon">
-                                        <ion-icon name="home"></ion-icon>
+                        <div class="field is-grouped is-grouped-multiline">
+                            <div class="navbar-item">
+                                <a href="/" class="button is-light is-link">
+                                    <span class="icon-text">
+                                        <span class="icon">
+                                            <ion-icon name="home"></ion-icon>
+                                        </span>
+                                        <span>Startside</span>
                                     </span>
-                                    <span>Startside</span>
-                                </span>
-                            </a>
+                                </a>
+                            </div>
+                            <div class="navbar-item">
+                                <a href="/items" class="button is-light is-warning">
+                                    <span class="icon-text">
+                                        <span class="icon">
+                                            <ion-icon name="american-football"></ion-icon>
+                                        </span>
+                                        <span>Antikviteter</span>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="navbar-item">
+                                <a href="#" class="button is-light is-success">
+                                    <span class="icon-text">
+                                        <span class="icon">
+                                            <ion-icon name="add"></ion-icon>
+                                        </span>
+                                        <span>Ny annonse</span>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="navbar-item">
+                                <a href="#" class="button is-light is-primary">
+                                    <span class="icon-text">
+                                        <span class="icon">
+                                            <ion-icon name="albums"></ion-icon>
+                                        </span>
+                                        <span>Mine annonser</span>
+                                    </span>
+                                </a>
+                            </div>
                         </div>
-                        <div class="navbar-item">
-                            <a href="/items" class="button is-light is-warning">
-                                <span class="icon-text">
-                                    <span class="icon">
-                                        <ion-icon name="american-football"></ion-icon>
-                                    </span>
-                                    <span>Antikviteter</span>
-                                </span>
-                            </a>
-                        </div>
-                        <div class="navbar-item">
-                            <a href="#" class="button is-light is-success">
-                                <span class="icon-text">
-                                    <span class="icon">
-                                        <ion-icon name="add"></ion-icon>
-                                    </span>
-                                    <span>Ny annonse</span>
-                                </span>
-                            </a>
-                        </div>
-                        <div class="navbar-item">
-                            <a href="#" class="button is-light is-primary">
-                                <span class="icon-text">
-                                    <span class="icon">
-                                        <ion-icon name="albums"></ion-icon>
-                                    </span>
-                                    <span>Mine annonser</span>
-                                </span>
-                            </a>
+                        <div class="navbar-item control">
+                            <form action="/search_result" method="get">
+                                <div class="field has-addons">
+                                    <div class="control has-icons-left">
+                                        <input type="text" name="search_input" class="input is-info" placeholder="skriv her.." required>
+                                    </div>
+                                    <div class="control">
+                                        <button type="submit" class="button is-info">Søk</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <div class="navbar-end">

@@ -2,8 +2,13 @@ from fastapi import APIRouter, Request
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
+
+
 from pysondb import db
+
+
 from ..models.item import Item
+
 
 items_db = db.getDb("data/items.json")
 
@@ -14,22 +19,20 @@ router = APIRouter()
 
 @router.get("/items/", tags=['items view'], response_class=HTMLResponse)
 async def read_items_view(request: Request):
-    return templates.TemplateResponse(
-        "items.html", {
-            "request": request,
-            "title": "Items",
-            "items": items_db.getAll()
-        })
+    return templates.TemplateResponse("items.html", {
+        "request": request,
+        "title": "Items",
+        "items": items_db.getAll()
+    })
 
 
 @router.get("/items/{id}", tags=['items view'], response_class=HTMLResponse)
 async def read_item_view(id: int, request: Request):
-    return templates.TemplateResponse(
-        "item.html", {
-            "request": request,
-            "title": "Item",
-            "item": items_db.getBy({"id": id})[0]
-        })
+    return templates.TemplateResponse("item.html", {
+        "request": request,
+        "title": "Item",
+        "item": items_db.getBy({"id": id})[0]
+    })
 
 
 @router.post("/api/items/", tags=['items api'])
