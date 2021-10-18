@@ -5,8 +5,8 @@
 # Custom #
 ##########
 
-data/*.json
-data/*.json.lock
+# data/*.json
+# data/*.json.lock
 
 ##########
 # Python #
