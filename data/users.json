@@ -1,1 +1,34 @@
-{"data": []}
+{
+  "data": [
+    {
+         "username": "enForhandler",
+         "first_name": "Seller",
+         "last_name": "Male",
+         "password": "abc123",
+         "email_address": "Seller@hotmail.com",
+         "phone_number": 11222112,
+         "role": "SELLER",
+         "id": 309119041177634483
+      },
+      {
+         "username": "enPlattformeier",
+         "first_name": "Owner",
+         "last_name": "Dude",
+         "password": "abc123",
+         "email_address": "Platform_owner@hotmail.com",
+         "phone_number": 23465778,
+         "role": "PLATFORM_OWNER",
+         "id": 331767122751353672
+      },
+      {
+         "username": "enSluttbruker",
+         "first_name": "User",
+         "last_name": "Guy",
+         "password": "abc123",
+         "email_address": "END_USER@hotmail.com",
+         "phone_number": 95504443,
+         "role": "END_USER",
+         "id": 304639587930338462
+      }
+  ]
+}
