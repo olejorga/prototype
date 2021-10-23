@@ -11,6 +11,7 @@ class User(BaseModel):
     password: str = ""
     email_address: str = ""
     phone_number: int = 0
+    pictures: list = [""]
     role: str = ""
 
     @validator("role")
