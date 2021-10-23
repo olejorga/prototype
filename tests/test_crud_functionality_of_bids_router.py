@@ -19,7 +19,7 @@ def test_read_bid_view():
     assert res.status_code == 200
 
 
-def test_create_bid():
+def test_create_new_bid_and_add_to_database():
     bid = Bid()
     res = client.post("/api/bids/", json=jsonable_encoder(bid))
     id = res.json()
@@ -33,7 +33,7 @@ def test_create_bid():
     bid_db.deleteById(id)
 
 
-def test_update_bid():
+def test_update_existing_bid_in_database():
     bid = Bid()
     id = bid_db.add(jsonable_encoder(bid))
     bid.bid_value = 1.0
@@ -48,7 +48,7 @@ def test_update_bid():
     bid_db.deleteById(id)
 
 
-def test_delete_bid():
+def test_delete_existing_bid_from_database():
     bid = Bid()
     id = bid_db.add(jsonable_encoder(bid))
     res = client.delete("/api/bids/" + str(id))

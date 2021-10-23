@@ -48,7 +48,7 @@ def test_update_existing_item_in_database():
     items_db.deleteById(id)
 
 
-def test_delete_item_from_database():
+def test_delete_existing_item_from_database():
     item = Item()
     id = items_db.add(jsonable_encoder(item))
     res = client.delete("/api/items/" + str(id))
