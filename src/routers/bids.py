@@ -8,7 +8,6 @@ from pysondb.db import DataNotFoundError
 
 from ..models.bid import Bid, UpdateBid
 
-
 bid_db = db.getDb("data/bids.json")
 
 templates = Jinja2Templates(directory="src/templates")
@@ -35,27 +34,27 @@ async def read_bid_view(bid_id: int, request: Request):
     })
 
 
-# include user_id from form in item.html in someway, then a bid can be set to both the item_id and user_id
+# include user_id from form in item.html in someway, then a bid_to_update can be set to both the item_id and user_id
 @router.post("/api/bids/{item_id}", tags=['bids api'])
 async def create_bid(bids_item_id: int, bid: Bid):
-    bid.item_id = bids_item_id
-#    bid.user_id = parameter
-    bid_id = bid_db.add(jsonable_encoder(bid))
-    return bid_id
+    bid.set_item_id(bids_item_id)
+#    bid.set_user_id(parameter)
+#    bid.set_bid_value(parameter)
+    return str(bid_db.add(jsonable_encoder(bid)))
 
 
 @router.put("/api/bids/{bid_id}", tags=['bids api'])
-async def update_bid(bid_id: int, bid: UpdateBid):
-    if bid.bid_value is not None:
-        bid_db.updateById(bid_id, {"bid_value": bid.bid_value})
+async def update_bid(bid_id, bid_to_update: UpdateBid):
+    if bid_to_update.get_bid_value() is not None:
+        bid_db.updateById(bid_id, {"bid_value": bid_to_update.get_bid_value()})
 
-    if bid.user_id is not None:
-        bid_db.updateById(bid_id, {"user_id": bid.user_id})
+    if bid_to_update.get_user_id is not None:
+        bid_db.updateById(bid_id, {"user_id": bid_to_update.get_user_id()})
 
     return bid_id
 
 
 @router.delete("/api/bids/{id}", tags=['bids api'])
-async def delete_bid(id: int):
+async def delete_bid(id):
     id = bid_db.deleteById(id)
     return id
