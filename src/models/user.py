@@ -8,8 +8,10 @@ class User(BaseModel):
     username: str = ""
     first_name: str = ""
     last_name: str = ""
+    password: str = ""
     email_address: str = ""
     phone_number: int = 0
+    pictures: list = [""]
     role: str = ""
 
     @validator("role")

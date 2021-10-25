@@ -21,8 +21,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse, Response
 from fastapi.templating import Jinja2Templates
 from pysondb import db
-from .routers import items, bids, users, search, receipt
-
+from .routers import items, bids, users, search, receipt, new_item
 
 users_db = db.getDb("data/users.json")
 
@@ -37,6 +36,7 @@ app.include_router(bids.router)
 app.include_router(users.router)
 app.include_router(search.router)
 app.include_router(receipt.router)
+app.include_router(new_item.router)
 
 
 @app.get("/", tags=['root view'], response_class=HTMLResponse)

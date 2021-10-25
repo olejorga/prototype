@@ -39,9 +39,10 @@
                             <article class="tile is-child box">
                                 <article class="card">
                                     <div class="card-image">
-                                        <figure class="image is-4by3 has-background-dark">
-                                        </figure>
-                                    </div>
+                                            <figure class="image is-4by3 has-background-dark">
+                                                <img src="{{ user.pictures[0] }}" alt="{{ user.username }}" class="keeps-aspect-ratio">
+                                            </figure>
+                                        </div>
                                     <div class="card-content">
                                         <h2 class="title is-4">{{ user.first_name }}</h2>
                                     </div>
