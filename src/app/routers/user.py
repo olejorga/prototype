@@ -1,8 +1,6 @@
-from fastapi import APIRouter, Request, Form, status, HTTPException
-from fastapi.encoders import jsonable_encoder
-from fastapi.responses import HTMLResponse, Response, RedirectResponse
+from fastapi import APIRouter, Form
+from fastapi.responses import Response, RedirectResponse
 from fastapi.templating import Jinja2Templates
-from ...core.entities.buyer import Buyer
 from ..models.pickle_repository import PickleRepository
 
 

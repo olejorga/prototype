@@ -21,7 +21,7 @@ from fastapi import FastAPI, Request, Cookie
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse, Response
 from fastapi.templating import Jinja2Templates
-from .routers import listing
+from .routers import listing, user, bid, search
 
 
 templates = Jinja2Templates(directory="src/app/templates")
@@ -29,6 +29,9 @@ templates = Jinja2Templates(directory="src/app/templates")
 app = FastAPI()
 
 app.include_router(listing.router)
+app.include_router(user.router)
+app.include_router(bid.router)
+app.include_router(search.router)
 
 from .models.pickle_repository import PickleRepository
 from ..core.entities.sale import Sale

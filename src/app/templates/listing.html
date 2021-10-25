@@ -46,7 +46,7 @@
                 <form class="field has-addons" action="api/bids/{{ listing.id }}" method="post">
                     {% if listing.get_class_name() == "Auction" %}
                         <div class="control has-icons-left">
-                            <input class="input is-medium is-light" type="number" min="{{ listing.get_price() + 1 }}" value="{{ listing.get_price() + 1 }}" placeholder="Bud">
+                            <input name="amount" class="input is-medium is-light" type="number" min="{{ listing.get_price() + 1 }}" value="{{ listing.get_price() + 1 }}" placeholder="F.eks. 100">
                             <span class="icon is-left">kr</span>
                         </div>
                         <div class="control">

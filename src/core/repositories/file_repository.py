@@ -62,9 +62,9 @@ class FileRepository(Repository):
         self.load()
 
         for entity in self.entities:
-            if value == entity.__dict__[key]:
-                results.append(results)
- 
+            if entity.__dict__[key] == value:
+                results.append(entity)
+
         return results
 
 
