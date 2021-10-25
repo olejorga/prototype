@@ -21,25 +21,25 @@ from fastapi import FastAPI, Request, Cookie
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse, Response
 from fastapi.templating import Jinja2Templates
-from pysondb import db
-from .routers import items, bids, users, search, receipt, new_item
+from .routers import listing
 
-users_db = db.getDb("data/users.json")
 
-templates = Jinja2Templates(directory="src/templates")
+templates = Jinja2Templates(directory="src/app/templates")
 
 app = FastAPI()
 
-app.mount("/static", StaticFiles(directory="src/static"), name="static")
+app.include_router(listing.router)
 
-app.include_router(items.router)
-app.include_router(bids.router)
-app.include_router(users.router)
-app.include_router(search.router)
-app.include_router(receipt.router)
-app.include_router(new_item.router)
+from .models.pickle_repository import PickleRepository
+from ..core.entities.sale import Sale
+from ..core.entities.auction import Auction
 
+listings = PickleRepository("data/listings.dat")
 
+#listings.create(Sale("A thing", 100, "...", ["..."]))
+#listings.create(Auction("A thing", 100, "...", ["..."], "2022-10-25 19:17:10.601901"))
+
+"""
 @app.get("/", tags=['root view'], response_class=HTMLResponse)
 async def read_root_view(request: Request, user_session = Cookie(None)):
     if user_session is None:
@@ -58,3 +58,4 @@ async def read_root_view(request: Request, user_session = Cookie(None)):
             "title": "Hjem",
             "user": user
         })
+"""

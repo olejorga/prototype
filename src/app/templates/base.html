@@ -5,7 +5,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{ title }}</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-        <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}">
+        <style>
+
+            .navbar-item:hover {
+                color: #000000 !important;
+            }
+
+            .keeps-aspect-ratio {
+                margin: 0 auto !important;
+                width: auto !important;
+                height: 100% !important;
+            }
+
+        </style>
     </head>
     <body class="container">
         <header class="section">
@@ -20,62 +32,65 @@
                 </div>
                 <div id="header-navbar" class="navbar-menu">
                     <div class="navbar-start">
-                        <div class="field is-grouped is-grouped-multiline">
-                            <div class="navbar-item">
-                                <a href="/" class="button is-light is-link">
-                                    <span class="icon-text">
-                                        <span class="icon">
-                                            <ion-icon name="home"></ion-icon>
-                                        </span>
-                                        <span>Startside</span>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="navbar-item">
-                                <a href="/items" class="button is-light is-warning">
-                                    <span class="icon-text">
-                                        <span class="icon">
-                                            <ion-icon name="american-football"></ion-icon>
-                                        </span>
-                                        <span>Antikviteter</span>
-                                    </span>
-                                </a>
-                            </div>
-                            {% if user and (user["role"] == "SELLER" or user["role"] == "PLATFORM_OWNER") %}
-                            <div class="navbar-item">
-                                <a href="/ny annonse" class="button is-light is-success">
-                                    <span class="icon-text">
-                                        <span class="icon">
-                                            <ion-icon name="add"></ion-icon>
-                                        </span>
-                                        <span>Ny annonse</span>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="navbar-item">
-                                <a href="#" class="button is-light is-primary">
-                                    <span class="icon-text">
-                                        <span class="icon">
-                                            <ion-icon name="albums"></ion-icon>
-                                        </span>
-                                        <span>Mine annonser</span>
-                                    </span>
-                                </a>
-                            </div>
-                            {% endif %}
-                        </div>
                         <div class="navbar-item">
-                            <form action="/search_result" method="get">
-                                <div class="field has-addons">
-                                    <div class="control has-icons-left">
-                                        <input type="text" name="search_input" class="input is-info" placeholder="skriv her.." required>
-                                    </div>
-                                    <div class="control">
-                                        <button type="submit" class="button is-info">Søk</button>
-                                    </div>
+                            <form class="field has-addons" action="/search_result" method="post">
+                                <div class="control">
+                                    <input type="text" name="search_input" class="input is-black" placeholder="F.eks. bord ..." required>
+                                </div>
+                                <div class="control">
+                                    <button type="submit" class="button is-black">
+                                        <span class="icon-text">
+                                            <span class="icon">
+                                                <ion-icon name="search-outline"></ion-icon>
+                                            </span>
+                                            <span>Søk</span>
+                                        </span>
+                                    </button>
                                 </div>
                             </form>
                         </div>
+                        <div class="navbar-item">
+                            <a href="/" class="button is-light is-link">
+                                <span class="icon-text">
+                                    <span class="icon">
+                                        <ion-icon name="home"></ion-icon>
+                                    </span>
+                                    <span>Startside</span>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="navbar-item">
+                            <a href="/listings" class="button is-light is-warning">
+                                <span class="icon-text">
+                                    <span class="icon">
+                                        <ion-icon name="american-football"></ion-icon>
+                                    </span>
+                                    <span>Antikviteter</span>
+                                </span>
+                            </a>
+                        </div>
+                        {% if user and (user["role"] == "SELLER" or user["role"] == "PLATFORM_OWNER") %}
+                        <div class="navbar-item">
+                            <a href="/listings/new" class="button is-light is-success">
+                                <span class="icon-text">
+                                    <span class="icon">
+                                        <ion-icon name="add"></ion-icon>
+                                    </span>
+                                    <span>Ny annonse</span>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="navbar-item">
+                            <a href="#" class="button is-light is-primary">
+                                <span class="icon-text">
+                                    <span class="icon">
+                                        <ion-icon name="albums"></ion-icon>
+                                    </span>
+                                    <span>Mine annonser</span>
+                                </span>
+                            </a>
+                        </div>
+                        {% endif %}
                     </div>
                     <div class="navbar-end">
                         {% if user %}
@@ -134,6 +149,58 @@
         </footer>
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-        <script src="{{ url_for('static', path='/script.js') }}"></script>
+        <script>
+
+            var burgers = document.querySelectorAll(".navbar-burger");
+
+            burgers.forEach(burger => {
+                burger.addEventListener("click", () => {
+                    burger.classList.toggle("is-active");
+
+                    var target = document.getElementById(burger.dataset.target);
+                    target.classList.toggle("is-active");
+                });
+            });
+
+            var fakeLoginBtns = document.querySelectorAll(".fake-login-btn");
+
+            fakeLoginBtns.forEach(fakeLoginBtn => {
+                fakeLoginBtn.addEventListener("click", () => {
+                    const userType = fakeLoginBtn.dataset.target;
+                    let formData = new FormData();
+
+                    switch (userType) {
+                        case "SELLER":
+                            formData.append('username', 'enForhandler');
+                            formData.append('password', 'abc123');
+
+                            break;
+
+                        case "PLATFORM_OWNER":
+                            formData.append('username', 'enPlattformeier');
+                            formData.append('password', 'abc123');
+
+                            break;
+
+                        case "END_USER":
+                            formData.append('username', 'enSluttbruker');
+                            formData.append('password', 'abc123');
+
+                            break;
+                    
+                        default:
+                            return null;
+                    }
+
+                    fetch("/api/users/login", {
+                        body: formData,
+                        method: "post"
+                    }).then(res => {
+                        window.location.href = res.url
+                    });
+                });
+            });
+
+        </script>
     </body>
 </html>

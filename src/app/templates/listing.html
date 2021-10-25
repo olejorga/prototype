@@ -4,12 +4,12 @@
         <article class="columns">
             <div class="column">
                 <figure class="image is-4by3 has-background-white">
-                    <img src="{{ item.pictures[0] }}" alt="{{ item.name }}" class="keeps-aspect-ratio">
+                    <img src="{{ listing.get_pictures()[0] }}" alt="{{ listing.get_title() }}" class="keeps-aspect-ratio">
                 </figure>
             </div>
             <div class="column">
-                <h1 class="title is-1">{{ item.name }}</h1>
-                <h2 class="subtitle is-1 has-text-weight-bold has-text-grey">{{ item.price }} kr</h2>
+                <h1 class="title is-1">{{ listing.get_title() }}</h1>
+                <h2 class="subtitle is-1 has-text-weight-bold has-text-grey">{{ listing.get_price() }} kr</h2>
                 <ul class="mb-6">
                     <li class="my-2">
                         <span class="icon-text">
@@ -19,14 +19,14 @@
                             <span>Fredrikstad</span>
                         </span>
                     </li>
-                    {% if item.is_auction > 0 %}
+                    {% if listing.get_class_name() == "Auction" %}
                         <li class="my-2">
                             <span class="tag is-medium is-light is-success">
                                 <span class="icon-text">
                                     <span class="icon">
                                         <ion-icon name="cash-outline"></ion-icon>
                                     </span>
-                                    <span>Høyeste bud hittil {{ item.price }} kr</span>
+                                    <span>Høyeste bud hittil {{ listing.get_price() }} kr</span>
                                 </span>
                             </span>
                         </li>
@@ -36,17 +36,17 @@
                                     <span class="icon">
                                         <ion-icon name="hourglass-outline"></ion-icon>
                                     </span>
-                                    <span>Auksjonen varer til {{ item.auction_time }} kr</span>
+                                    <span>Auksjonen varer til {{ listing.get_end_datetime() }}</span>
                                 </span>
                             </span>
                         </li>
                     {% endif %}
                 </ul>
-                <p class="block">{{ item.description }}</p>
-                <form class="field has-addons" action="api/bids/{{ item.id }}" method="post">
-                    {% if item.is_auction > 0 %}
+                <p class="block">{{ listing.get_description() }}</p>
+                <form class="field has-addons" action="api/bids/{{ listing.id }}" method="post">
+                    {% if listing.get_class_name() == "Auction" %}
                         <div class="control has-icons-left">
-                            <input class="input is-medium is-light" type="number" min="{{ item.price + 1 }}" value="{{ item.price + 1 }}" placeholder="Bud">
+                            <input class="input is-medium is-light" type="number" min="{{ listing.get_price() + 1 }}" value="{{ listing.get_price() + 1 }}" placeholder="Bud">
                             <span class="icon is-left">kr</span>
                         </div>
                         <div class="control">

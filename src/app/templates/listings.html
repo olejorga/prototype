@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="tile is-ancestor is-flex-wrap-wrap">
+        {% for listing in listings %}
+            <div class="tile is-parent is-3">
+                <article class="tile is-child box">
+                    <article class="card">
+                        <div class="card-image">
+                            <figure class="image is-4by3 has-background-white">
+                                <img src="{{ listing.get_pictures()[0] }}" alt="{{ listing.get_title() }}" class="keeps-aspect-ratio">
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <h2 class="title is-4">{{ listing.get_title() }}</h2>
+                            <h3 class="subtitle is-4 has-text-weight-bold has-text-grey">{{ listing.get_price() }} kr</h3>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-footer-item">
+                                <a href="/listings/{{ listing.id }}" class="button is-light is-black is-fullwidth">Se mer</a>
+                            </div>
+                        </div>
+                    </article>
+                </article>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

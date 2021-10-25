@@ -41,8 +41,7 @@ class FileRepository(Repository):
 
         if entity is not None:
             self.entities.remove(entity)
-
-        self.save()
+            self.save()
 
 
     # OVERRIDE
@@ -50,7 +49,7 @@ class FileRepository(Repository):
         self.load()
 
         for entity in self.entities:
-            if id == entity.id:
+            if entity.id == id:
                 return entity
 
         return None
@@ -75,7 +74,7 @@ class FileRepository(Repository):
         if self.find(id) is not None :
             return self.assign_id()
 
-        return id
+        return str(id)
 
 
     def load(self):
