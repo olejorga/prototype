@@ -4,7 +4,7 @@ from .user import User
 class Admin(User):
 
     def __init__(self, username: str, password: str, email_address: str,
-                 phone_number: int, first_name: str, last_name: str):
+                 phone_number: str, first_name: str, last_name: str):
 
         super().__init__(username, password, email_address, phone_number)
 

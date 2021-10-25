@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Form
 from fastapi.responses import Response, RedirectResponse
 from fastapi.templating import Jinja2Templates
+from fastapi.exceptions import HTTPException
 from ..models.pickle_repository import PickleRepository
 
 
@@ -15,15 +16,16 @@ router = APIRouter()
 async def login_user(response: Response, username: str = Form(...), 
                      password: str = Form(...)):
 
-    user = users_repo.search("username", username)
+    user = users_repo.search("username", username)[0]
 
-    if len(user) == 1 and user[0].password == password:
-        token = user["id"]
-        response = RedirectResponse(url="/")
-        response.status_code = 302
-        response.set_cookie("user_token", token)
+    if user is None or user.password != password:
+        raise HTTPException(status_code = 403)
+    
+    response = RedirectResponse(url="/")
+    response.status_code = 302
+    response.set_cookie("user_token", user.id)
 
-        return response
+    return response
 
 
 @router.get("/api/users/logout", tags=["user", "api"])

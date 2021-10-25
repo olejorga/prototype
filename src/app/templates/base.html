@@ -69,7 +69,7 @@
                                 </span>
                             </a>
                         </div>
-                        {% if user and (user["role"] == "SELLER" or user["role"] == "PLATFORM_OWNER") %}
+                        {% if request.state.current_user and (request.state.current_user.get_class_name() in ["Admin", "Seller"]) %}
                         <div class="navbar-item">
                             <a href="/listings/new" class="button is-light is-success">
                                 <span class="icon-text">
@@ -81,7 +81,7 @@
                             </a>
                         </div>
                         <div class="navbar-item">
-                            <a href="#" class="button is-light is-primary">
+                            <a href="/listings/my" class="button is-light is-primary">
                                 <span class="icon-text">
                                     <span class="icon">
                                         <ion-icon name="albums"></ion-icon>
@@ -93,14 +93,14 @@
                         {% endif %}
                     </div>
                     <div class="navbar-end">
-                        {% if user %}
+                        {% if request.state.current_user %}
                             <div class="navbar-item has-dropdown is-hoverable">
                                 <div class="navbar-link">
                                     <span class="icon-text">
                                         <span class="icon">
                                             <ion-icon name="person-outline"></ion-icon>
                                         </span>
-                                        <span>{{ user.username }}</span>
+                                        <span>{{ request.state.current_user.username }}</span>
                                     </span>
                                 </div>
                                 <div class="navbar-dropdown is-right is-boxed">
@@ -126,8 +126,8 @@
                                 </div>
                                 <div class="navbar-dropdown is-right is-boxed">
                                     <a class="navbar-item fake-login-btn" data-target="SELLER">Forhandler</a>
-                                    <a class="navbar-item fake-login-btn" data-target="PLATFORM_OWNER">Plattformeier</a>
-                                    <a class="navbar-item fake-login-btn" data-target="END_USER">Sluttbruker</a>
+                                    <a class="navbar-item fake-login-btn" data-target="ADMIN">Administrator</a>
+                                    <a class="navbar-item fake-login-btn" data-target="BUYER">Sluttbruker</a>
                                 </div>
                             </div>
                         {% endif %}
@@ -172,19 +172,19 @@
                     switch (userType) {
                         case "SELLER":
                             formData.append('username', 'enForhandler');
-                            formData.append('password', 'abc123');
+                            formData.append('password', 'abc123456');
 
                             break;
 
-                        case "PLATFORM_OWNER":
-                            formData.append('username', 'enPlattformeier');
-                            formData.append('password', 'abc123');
+                        case "ADMIN":
+                            formData.append('username', 'enAdministrator');
+                            formData.append('password', 'abc123456');
 
                             break;
 
-                        case "END_USER":
+                        case "BUYER":
                             formData.append('username', 'enSluttbruker');
-                            formData.append('password', 'abc123');
+                            formData.append('password', 'abc123456');
 
                             break;
                     

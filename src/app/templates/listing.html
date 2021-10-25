@@ -19,44 +19,12 @@
                             <span>Fredrikstad</span>
                         </span>
                     </li>
-                    {% if listing.get_class_name() == "Auction" %}
-                        <li class="my-2">
-                            <span class="tag is-medium is-light is-success">
-                                <span class="icon-text">
-                                    <span class="icon">
-                                        <ion-icon name="cash-outline"></ion-icon>
-                                    </span>
-                                    <span>Høyeste bud hittil {{ listing.get_price() }} kr</span>
-                                </span>
-                            </span>
-                        </li>
-                        <li class="my-2">
-                            <span class="tag is-medium is-light is-warning">
-                                <span class="icon-text">
-                                    <span class="icon">
-                                        <ion-icon name="hourglass-outline"></ion-icon>
-                                    </span>
-                                    <span>Auksjonen varer til {{ listing.get_end_datetime() }}</span>
-                                </span>
-                            </span>
-                        </li>
-                    {% endif %}
                 </ul>
                 <p class="block">{{ listing.get_description() }}</p>
                 <form class="field has-addons" action="api/bids/{{ listing.id }}" method="post">
-                    {% if listing.get_class_name() == "Auction" %}
-                        <div class="control has-icons-left">
-                            <input name="amount" class="input is-medium is-light" type="number" min="{{ listing.get_price() + 1 }}" value="{{ listing.get_price() + 1 }}" placeholder="F.eks. 100">
-                            <span class="icon is-left">kr</span>
-                        </div>
-                        <div class="control">
-                            <button type="submit" class="button is-medium is-light is-success">Legg inn bud</button>
-                        </div>
-                    {% else %}
-                        <div class="control">
-                            <button type="submit" class="button is-medium is-light is-success">Kjøp</button>
-                        </div>
-                    {% endif %}
+                    <div class="control">
+                        <button type="submit" class="button is-medium is-light is-success">Kjøp</button>
+                    </div>
                 </form>
             </div>
         </article>

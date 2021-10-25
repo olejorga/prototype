@@ -1,5 +1,5 @@
 from typing import List
-from fastapi import APIRouter, Request, Form, Cookie
+from fastapi import APIRouter, Request, Form
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.exceptions import HTTPException
@@ -25,8 +25,8 @@ async def read_listings_view(request: Request):
 
 
 @router.get("/listings/my", tags=["listing", "view"], response_class=HTMLResponse)
-async def read_sellers_listings_view(request: Request, user_token = Cookie(None)):
-    user = users_repo.find(user_token)
+async def read_sellers_listings_view(request: Request):
+    user = request.state.current_user
 
     if user is None or user.get_class_name() != "Seller":
         raise HTTPException(status_code = 403)
@@ -39,8 +39,8 @@ async def read_sellers_listings_view(request: Request, user_token = Cookie(None)
 
 
 @router.get("/listings/new", tags=["listing", "view"], response_class=HTMLResponse)
-async def read_new_listing_view(request: Request, user_token = Cookie(None)):
-    user = users_repo.find(user_token)
+async def read_new_listing_view(request: Request):
+    user = request.state.current_user
 
     if user is None or user.get_class_name() != "Seller":
         raise HTTPException(status_code = 403)

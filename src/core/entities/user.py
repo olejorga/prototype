@@ -5,7 +5,7 @@ from .entity import Entity
 class User(Entity):
 
     def __init__(self, username: str, password: str, email_address: str,
-                 phone_number: int):
+                 phone_number: str):
 
         self.set_username(username)
         self.set_password(password)
@@ -56,7 +56,7 @@ class User(Entity):
         return self.phone_number
 
 
-    def set_phone_number(self, new_phone_number: int):
+    def set_phone_number(self, new_phone_number: str):
         regex = "^[0-9]{8}$"
 
         if not re.fullmatch(regex, new_phone_number):
