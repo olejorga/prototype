@@ -1,23 +1,17 @@
-from os import environ
-from fastapi import APIRouter, Form
+from fastapi import APIRouter, Form, Depends
 from fastapi.responses import Response, RedirectResponse
-from fastapi.templating import Jinja2Templates
 from fastapi.exceptions import HTTPException
-from ..models.pickle_repository import PickleRepository
+from ..dependencies import get_repositories
 
-
-users_repo = PickleRepository(environ["USERS_REPO_PATH"])
-
-templates = Jinja2Templates(directory=environ["TEMPLATES_PATH"])
 
 router = APIRouter()
 
 
 @router.post("/api/users/login", tags=["user", "api"])
 async def login_user(response: Response, username: str = Form(...), 
-                     password: str = Form(...)):
+                     password: str = Form(...), repos = Depends(get_repositories)):
 
-    user = users_repo.search("username", username)[0]
+    user = repos["users"].search("username", username)[0]
 
     if user is None or user.password != password:
         raise HTTPException(status_code = 403)
