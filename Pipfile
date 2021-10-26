@@ -6,8 +6,6 @@ name = "pypi"
 [packages]
 fastapi = "*"
 uvicorn = "*"
-aiofiles = "*"
-pysondb = "*"
 jinja2 = "*"
 pytest = "*"
 requests = "*"
