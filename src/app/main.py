@@ -20,7 +20,7 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from .routers import listing, user, search
+from .routers import listing, user, search, receipt
 from .models.pickle_repository import PickleRepository
 
 
@@ -33,6 +33,7 @@ app = FastAPI()
 app.include_router(listing.router)
 app.include_router(user.router)
 app.include_router(search.router)
+app.include_router(receipt.router)
 
 
 @app.get("/", tags=["root", "view"], response_class=HTMLResponse)

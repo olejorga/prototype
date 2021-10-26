@@ -2,7 +2,11 @@
 {% block content %}
     <section class="section">
         <h1 class="title is-1">Din kvittering</h1>
-        
+            <ul>
+                <li>{{ receipt.get_title() }}</li>
+                <li>{{ receipt.get_price() }}</li>
+                <li>{{ receipt.get_date() }}</li>
+            </ul>
         
     </section>
 {% endblock %}

@@ -13,16 +13,16 @@ class Receipt(Entity):
         return self.title
 
     def set_title(self, listing: Listing):
-        self.title = listing.get_title
+        self.title = listing.get_title()
 
     def get_price(self):
         return self.price
 
     def set_price(self, listing: Listing):
-        self.price = listing.get_price
+        self.price = listing.get_price()
     
     def get_date(self):
-        return self.get_date
+        return self.sale_date
     
     def set_date(self):
         self.sale_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
