@@ -17,12 +17,16 @@
 #       * Sivert Østgård
 #
 
+#from configparser import ConfigParser
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from .routers import listing, user, search
 from .models.pickle_repository import PickleRepository
 
+
+#config = ConfigParser()
+#config.read('config.ini')
 
 users_repo = PickleRepository("data/users.dat")
 
@@ -43,7 +47,7 @@ async def read_root_view(request: Request):
             "title": "Hjem"
         })
 
-
+"""
 @app.middleware("http")
 async def set_current_user(request: Request, call_next):
     user_token = request.cookies.get("user_token")
@@ -53,3 +57,4 @@ async def set_current_user(request: Request, call_next):
     response = await call_next(request)
 
     return response
+"""

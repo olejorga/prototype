@@ -19,5 +19,5 @@ python_version = "3.8"
 
 [scripts]
 app = "uvicorn src.app.main:app"
-devmode = "uvicorn src.app.main:app --reload 'simer er best'"
+devmode = "uvicorn src.app.main:app --reload"
 tests = "pytest -v -p no:warnings"
