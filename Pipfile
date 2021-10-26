@@ -20,4 +20,4 @@ python_version = "3.8"
 [scripts]
 app = "uvicorn src.app.main:app"
 devmode = "uvicorn src.app.main:app --reload"
-tests = "pytest tests -v -p no:warnings"
+tests = "pytest -v -p no:warnings"
