@@ -17,21 +17,24 @@
 #       * Sivert Østgård
 #
 
-
 from os import environ
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Depends
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from .routers import listing, user, search
 from .models.pickle_repository import PickleRepository
 
-print(environ["USERS_REPO_PATH"])
+
+async def get_current_user(request: Request):
+    user_token = request.cookies.get("user_token")
+    request.state.current_user = users_repo.find(user_token)
+
 
 users_repo = PickleRepository(environ["USERS_REPO_PATH"])
 
 templates = Jinja2Templates(directory="src/app/templates")
 
-app = FastAPI()
+app = FastAPI(dependencies=[Depends(get_current_user)])
 
 app.include_router(listing.router)
 app.include_router(user.router)
@@ -45,14 +48,3 @@ async def read_root_view(request: Request):
             "request": request,
             "title": "Hjem"
         })
-
-
-@app.middleware("http")
-async def get_current_user(request: Request, call_next):
-    user_token = request.cookies.get("user_token")
-
-    request.state.current_user = users_repo.find(user_token)
-
-    response = await call_next(request)
-
-    return response
