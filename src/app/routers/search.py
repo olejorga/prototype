@@ -1,12 +1,13 @@
+from os import environ
 from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from ..models.pickle_repository import PickleRepository
 
 
-listings_repo = PickleRepository("data/listings.dat")
+listings_repo = PickleRepository(environ["LISTINGS_REPO_PATH"])
 
-templates = Jinja2Templates(directory="src/app/templates")
+templates = Jinja2Templates(directory=environ["TEMPLATES_PATH"])
 
 router = APIRouter()
 

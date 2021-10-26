@@ -1,3 +1,4 @@
+from os import environ
 from fastapi import APIRouter, Form
 from fastapi.responses import Response, RedirectResponse
 from fastapi.templating import Jinja2Templates
@@ -5,9 +6,9 @@ from fastapi.exceptions import HTTPException
 from ..models.pickle_repository import PickleRepository
 
 
-users_repo = PickleRepository("data/users.dat")
+users_repo = PickleRepository(environ["USERS_REPO_PATH"])
 
-templates = Jinja2Templates(directory="src/templates")
+templates = Jinja2Templates(directory=environ["TEMPLATES_PATH"])
 
 router = APIRouter()
 
