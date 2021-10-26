@@ -25,6 +25,13 @@ from .routers import listing, user, search
 from .models.pickle_repository import PickleRepository
 
 
+class Main:
+
+    def __init__(self, config):
+        
+        pass
+
+
 #config = ConfigParser()
 #config.read('config.ini')
 
