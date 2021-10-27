@@ -19,5 +19,4 @@ python_version = "3.8"
 [scripts]
 app = "uvicorn src.app.main:app"
 devmode = "uvicorn src.app.main:app --reload"
-tests = "pytest -v -p no:warnings"
-test = "python3 -W ignore:warnings -m unittest -v"
+tests = "python3 -W ignore:warnings -m unittest -v"
