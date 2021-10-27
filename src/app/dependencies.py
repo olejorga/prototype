@@ -4,7 +4,7 @@ from fastapi.templating import Jinja2Templates
 from .models.pickle_repository import PickleRepository
 
 
-@lru_cache
+@lru_cache # Cache repo instances, to reduse resource usage
 def get_repositories():
     return {
         "listings": PickleRepository("data/listings.dat"),
@@ -12,7 +12,7 @@ def get_repositories():
     }
 
 
-@lru_cache
+@lru_cache # Cache template instance, to reduse resource usage
 def get_templates():
     return Jinja2Templates(directory="src/app/templates")
 
