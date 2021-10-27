@@ -69,6 +69,18 @@
                                 </span>
                             </a>
                         </div>
+                        {% if request.state.current_user and (request.state.current_user.get_class_name() in ["Buyer"]) %}
+                        <div class="navbar-item">
+                            <a href="/receipts" class="button is-light is-info">
+                                <span class="icon-text">
+                                    <span class="icon">
+                                        <ion-icon name="albums"></ion-icon>
+                                    </span>
+                                    <span>Tidligere kjøp</span>
+                                </span>
+                            </a>
+                        </div>
+                        {% endif %}
                         {% if request.state.current_user and (request.state.current_user.get_class_name() in ["Admin", "Seller"]) %}
                         <div class="navbar-item">
                             <a href="/listings/new" class="button is-light is-success">

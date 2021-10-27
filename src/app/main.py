@@ -19,7 +19,7 @@
 
 from fastapi import FastAPI, Request, Depends
 from fastapi.responses import HTMLResponse
-from .routers import listing, user, search
+from .routers import listing, user, search, receipt
 from .dependencies import get_current_user, get_templates
 
 
@@ -28,6 +28,7 @@ app = FastAPI(dependencies=[Depends(get_current_user)])
 app.include_router(listing.router)
 app.include_router(user.router)
 app.include_router(search.router)
+app.include_router(receipt.router)
 
 
 @app.get("/", tags=["root", "view"], response_class=HTMLResponse)

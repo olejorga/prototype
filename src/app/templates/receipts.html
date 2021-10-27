@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section class="section">
+        <h1 class="title is-1">Dine kvitteringer</h1>
+            <div class="tile is-ancestor is-flex-wrap-wrap flex-direction: column-reverse">
+                {% if receipts|length > 0 %}
+                    {% for receipt in receipts %}
+                        <a href="/receipts/{{ receipt.id }}" class="tile is-child box is-5">
+                            <ul>
+                                <li>Varenavn: {{ receipt.get_title() }}</li>
+                                <li>Pris: {{ receipt.get_price() }},- NOK</li>
+                                <li>Kjøpt dato: {{ receipt.get_date() }}</li>
+                            </ul>
+                        </a>
+                    {% endfor %}
+                {% else %}
+                <h1 class="title">Du har ingen kvitteringer</h1>
+                {% endif %}
+            </div>
+    </section>
+{% endblock %}

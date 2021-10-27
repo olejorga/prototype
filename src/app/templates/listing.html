@@ -21,7 +21,7 @@
                     </li>
                 </ul>
                 <p class="block">{{ listing.get_description() }}</p>
-                <form class="field has-addons" action="api/bids/{{ listing.id }}" method="post">
+                <form class="field has-addons" action="/api/receipt/{{ listing.id }}" method="post">
                     <div class="control">
                         <button type="submit" class="button is-medium is-light is-success">Kjøp</button>
                     </div>
