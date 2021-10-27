@@ -8,7 +8,8 @@ from .models.pickle_repository import PickleRepository
 def get_repositories():
     return {
         "listings": PickleRepository("data/listings.dat"),
-        "users": PickleRepository("data/users.dat")
+        "users": PickleRepository("data/users.dat"),
+        "receipts": PickleRepository("data/receipts.dat")
     }
 
 
