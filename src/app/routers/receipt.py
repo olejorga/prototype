@@ -1,6 +1,6 @@
 from typing import List
 from fastapi import APIRouter, Request, Form
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, Response, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.exceptions import HTTPException
 
@@ -30,7 +30,7 @@ async def read_receipt_view(request: Request):
     })
 
 
-@router.get("/receipt/{id}", tags=["receipt", "view"], response_class=HTMLResponse)
+@router.get("/receipts/{id}", tags=["receipt", "view"], response_class=HTMLResponse)
 async def read_receipt(request: Request, id: str):
     receipt = receipt_repo.find(id)
 
@@ -42,9 +42,17 @@ async def read_receipt(request: Request, id: str):
 
 
 @router.post("/api/receipt/{id}", tags=["receipts", "api"])
-async def create_receipt(request: Request, id: str):
+async def create_receipt(response: Response, request: Request, id: str):
+    user = request.state.current_user
+
+    if user is None or user.get_class_name() != "Buyer":
+        raise HTTPException(status_code = 403)
+    
     listing = listings_repo.find(id)
-
     receipt = Receipt(listing)
-
     receipt_repo.create(receipt)
+
+    response = RedirectResponse(url="/receipts/")
+    response.status_code = 302
+    
+    return response

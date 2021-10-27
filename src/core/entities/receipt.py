@@ -25,5 +25,5 @@ class Receipt(Entity):
         return self.sale_date
     
     def set_date(self):
-        self.sale_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self.sale_date = datetime.now().strftime("%d.%m.%Y - %H:%M:%S")
     
