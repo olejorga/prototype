@@ -1,31 +1,30 @@
 from typing import List
 from fastapi import APIRouter, Request, Form
+from fastapi.param_functions import Depends
 from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
 from fastapi.exceptions import HTTPException
+from ..dependencies import get_templates, get_repositories
 from ...core.entities.listing import Listing
-from ..models.pickle_repository import PickleRepository
 
-
-listings_repo = PickleRepository("data/listings.dat")
-users_repo = PickleRepository("data/users.dat")
-
-templates = Jinja2Templates(directory="src/app/templates")
 
 router = APIRouter()
 
 
 @router.get("/listings/", tags=["listing", "view"], response_class=HTMLResponse)
-async def read_listings_view(request: Request):
+async def read_listings_view(request: Request, templates = Depends(get_templates), 
+                             repos = Depends(get_repositories)):
+    
     return templates.TemplateResponse("listings.html", {
         "request": request,
         "title": "Annonser",
-        "listings": listings_repo.read()
+        "listings": repos["listings"].read()
     })
 
 
 @router.get("/listings/my", tags=["listing", "view"], response_class=HTMLResponse)
-async def read_sellers_listings_view(request: Request):
+async def read_sellers_listings_view(request: Request, templates = Depends(get_templates), 
+                                     repos = Depends(get_repositories)):
+    
     user = request.state.current_user
 
     if user is None or user.get_class_name() != "Seller":
@@ -34,12 +33,12 @@ async def read_sellers_listings_view(request: Request):
     return templates.TemplateResponse("listings.html", {
         "request": request,
         "title": "Mine annonser",
-        "listings": listings_repo.search("user_id", user.id)
+        "listings": repos["listings"].search("user_id", user.id)
     })
 
 
 @router.get("/listings/new", tags=["listing", "view"], response_class=HTMLResponse)
-async def read_new_listing_view(request: Request):
+async def read_new_listing_view(request: Request, templates = Depends(get_templates)):
     user = request.state.current_user
 
     if user is None or user.get_class_name() != "Seller":
@@ -52,8 +51,10 @@ async def read_new_listing_view(request: Request):
 
 
 @router.get("/listings/{id}", tags=["listing", "view"], response_class=HTMLResponse)
-async def read_listing_view(request: Request, id: str):
-    listing = listings_repo.find(id)
+async def read_listing_view(request: Request, id: str, templates = Depends(get_templates), 
+                            repos = Depends(get_repositories)):
+    
+    listing = repos["listings"].find(id)
 
     return templates.TemplateResponse("listing.html", {
         "request": request,
@@ -62,13 +63,11 @@ async def read_listing_view(request: Request, id: str):
     })
 
 
-
-
-
 @router.post("/api/items/", tags=["listing", "api"])
 async def create_listing(title: str = Form(...), price: int = Form(...),
-                         description: str = Form(...), pictures: List[str] = Form(...)):
+                         description: str = Form(...), pictures: List[str] = Form(...),
+                         repos = Depends(get_repositories)):
 
     listing = Listing(title, price, description, pictures)
 
-    listings_repo.create(listing)
+    repos["listings"].create(listing)
