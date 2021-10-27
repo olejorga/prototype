@@ -1,10 +1,18 @@
+from unittest import TestCase
 from fastapi.testclient import TestClient
-from ..src.app.main import app
+from src.app.main import app
 
 
-client = TestClient(app)
+class WhenSomething(TestCase):
+
+    def setUp(self):
+        self.client = TestClient(app)
 
 
-def test_show_listings_view():
-    res = client.get("/")
-    assert res.status_code == 200
+    def test_something(self):
+        res = self.client.get("/")
+        self.assertEqual(res.status_code, 200)
+
+
+    def tearDown(self):
+        pass

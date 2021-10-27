@@ -19,5 +19,4 @@ def get_templates():
 
 async def get_current_user(request: Request, repos = Depends(get_repositories)):
     user_token = request.cookies.get("user_token")
-    print(repos)
     request.state.current_user = repos["users"].find(user_token)
