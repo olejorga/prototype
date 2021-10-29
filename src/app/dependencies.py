@@ -18,6 +18,8 @@ def get_templates():
     return Jinja2Templates(directory="src/app/templates")
 
 
+# Pin currently logged inn user to the global state 
+# (globally accessible thorugh "request")
 async def get_current_user(request: Request, repos = Depends(get_repositories)):
     user_token = request.cookies.get("user_token")
     request.state.current_user = repos["users"].find(user_token)
