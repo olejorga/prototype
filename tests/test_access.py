@@ -11,9 +11,10 @@ from src.core.entities.seller import Seller
 class When_opening_create_listing_page(TestCase):
 
     def setUp(self):
-        self.client = TestClient(app)
+        self.app = app
+        self.client = TestClient(self.app)
 
-        self.admin_fixture = Admin(
+        self.fake_admin = Admin(
             username="Admin",
             password="abcdefgh",
             email_address="admin@mail.com",
@@ -22,7 +23,7 @@ class When_opening_create_listing_page(TestCase):
             last_name="Admin"
         )
 
-        self.buyer_fixture = Buyer(
+        self.fake_buyer = Buyer(
             username="Buyer",
             password="abcdefgh",
             email_address="buyer@mail.com",
@@ -31,7 +32,7 @@ class When_opening_create_listing_page(TestCase):
             last_name="Buyer"
         )
 
-        self.seller_fixture = Seller(
+        self.fake_seller = Seller(
             username="Seller",
             password="abcdefgh",
             email_address="seller@mail.com",
@@ -42,9 +43,9 @@ class When_opening_create_listing_page(TestCase):
 
     def test_that_seller_have_access(self):
         async def fake_get_current_user(request: Request):
-            request.state.current_user = self.seller_fixture
+            request.state.current_user = self.fake_seller
 
-        app.dependency_overrides[get_current_user] = fake_get_current_user
+        self.app.dependency_overrides[get_current_user] = fake_get_current_user
     
         res = self.client.get("/listings/new")
 
@@ -53,9 +54,9 @@ class When_opening_create_listing_page(TestCase):
 
     def test_that_buyer_have_no_access(self):
         async def fake_get_current_user(request: Request):
-            request.state.current_user = self.buyer_fixture
+            request.state.current_user = self.fake_buyer
 
-        app.dependency_overrides[get_current_user] = fake_get_current_user
+        self.app.dependency_overrides[get_current_user] = fake_get_current_user
     
         res = self.client.get("/listings/new")
 
