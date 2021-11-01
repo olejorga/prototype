@@ -4,7 +4,7 @@
         <h1 class="title is-1">Dine kvitteringer</h1>
             <div class="tile is-ancestor is-flex-wrap-wrap flex-direction: column-reverse">
                 {% if receipts|length > 0 %}
-                    {% for receipt in receipts %}
+                    {% for receipt in receipts|reverse %}
                         <a href="/receipts/{{ receipt.id }}" class="tile is-child box is-5">
                             <ul>
                                 <li>Varenavn: {{ receipt.get_title() }}</li>
