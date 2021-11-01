@@ -11,7 +11,12 @@ router = APIRouter()
 async def login_user(response: Response, username: str = Form(...), 
                      password: str = Form(...), repos = Depends(get_repositories)):
 
-    user = repos["users"].search("username", username)[0]
+    users = repos["users"].search("username", username)
+
+    if users == []:
+        user = None
+    else:
+        user = users[0]
 
     if user is None or user.password != password:
         raise HTTPException(status_code = 403)
