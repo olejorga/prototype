@@ -10,8 +10,10 @@ router = APIRouter()
 async def read_search_view(request: Request, input: str, templates = Depends(get_templates), 
                            repos = Depends(get_repositories)):
 
+    search_pattern = input.title()
+    
     return templates.TemplateResponse("listings.html", {
         "request": request,
         "title": "Søkeresultater", 
-        "listings": repos["listings"].search("title", input)
+        "listings": repos["listings"].search("title", search_pattern)
     })
