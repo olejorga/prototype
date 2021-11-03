@@ -63,7 +63,7 @@ async def read_listing_view(request: Request, id: str, templates = Depends(get_t
     })
 
 
-@router.post("/api/listings/", tags=["listing", "api"], response_class=HTMLResponse)
+@router.post("/api/listings/", tags=["listing", "api"])
 async def create_listing(request: Request, title: str = Form(...), price: int = Form(...),
                          description: str = Form(...), pictures: List[str] = Form(...),
                          repos=Depends(get_repositories)):
