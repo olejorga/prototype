@@ -1,10 +1,46 @@
 {% extends 'base.html' %}
 {% block content %}
     <section class="section">
+        <div class="columns is-multiline is-mobile">
+            <div class="column is-narrow">
+                <aside class="column is-vcentered">
+                    <div class="column">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            Alpabetisk rekkefølge
+                        </label>
+                    </div>
+                    <div class="column">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            Lavest pris
+                        </label>
+                    </div>
+                    <div class="column">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            Høyest pris
+                        </label>
+                    </div>
+                    <div class="column">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            Nyest antikvitet
+                        </label>
+                    </div>
+                    <div class="column">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            Eldste  antikvitet
+                        </label>
+                    </div>
+                </aside>
+            </div>
+            <div class="column">
         <div class="tile is-ancestor is-flex-wrap-wrap">
             {% if listings|length > 0 %}
                 {% for listing in listings %}
-                    <div class="tile is-parent is-3">
+                    <div class="tile is-parent is-4">
                         <article class="tile is-child box">
                             <article class="card">
                                 <div class="card-image">
@@ -28,6 +64,8 @@
             {% else %}
                 <h1 class="title">Fant ingen annonser.</h1>
             {% endif %}
+        </div>
+        </div>
         </div>
     </section>
 {% endblock %}
