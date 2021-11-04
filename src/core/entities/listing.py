@@ -8,7 +8,7 @@ class Listing(Entity):
     def __init__(self, title: str, price: int, description: str, 
                  pictures: List[str], user_id: str):
 
-        self.user_id = user_id
+        self.set_user_id(user_id)
         self.set_title(title)
         self.set_price(price)
         self.set_description(description)
@@ -53,3 +53,9 @@ class Listing(Entity):
 
     def set_pictures(self, new_pictures: List[str]):
         self.pictures = new_pictures
+
+    def get_user_id(self):
+        return self.user_id
+    
+    def set_user_id(self, new_user_id: str):
+        self.user_id = new_user_id

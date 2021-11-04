@@ -1,7 +1,7 @@
 from unittest import TestCase
 from fastapi.testclient import TestClient
 from src.app.main import app
-from src.app.dependencies import get_current_user, get_repositories
+from src.app.dependencies import get_repositories
 from src.app.models.pickle_repository import PickleRepository
 from src.core.entities.admin import Admin
 from src.core.entities.buyer import Buyer
