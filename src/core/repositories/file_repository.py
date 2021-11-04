@@ -62,8 +62,11 @@ class FileRepository(Repository):
         self.load()
 
         for entity in self.entities:
-            if entity.__dict__[key] == value:
-                results.append(entity)
+            try:
+                if entity.__dict__[key] == value:
+                    results.append(entity)
+            except KeyError:
+                pass
 
         return results
 
@@ -77,7 +80,7 @@ class FileRepository(Repository):
     def assign_id(self) -> str:
         id = uuid.uuid1()
         
-        if self.find(id) is not None :
+        if self.find(id) is not None:
             return self.assign_id()
 
         return str(id)

@@ -3,28 +3,28 @@
 
 <section class="section" xmlns="http://www.w3.org/1999/html">
 
-        <h1 class="title is-1 has-text-centered">Legg til ny vare</h1>
+        <h1 class="title is-1 has-text-centered">Lag ny annonse</h1>
 
         <div class="container">
             <div class="columns is-variable is-centered">
                 <div class="column is-half">
                     <form class="field has-addons" action="/api/listings/" method="post">
                         <div class="column">
-                            <input type="text" name="title" placeholder="varenavn" class="input is-fullwidth" required>
+                            <input type="text" name="title" placeholder="Tittel" class="input is-fullwidth is-dark" required>
                             <br>
-                            <input type="text" name="price" placeholder="pris" class="input is-fullwidth" required>
+                            <input type="text" name="price" placeholder="Pris" class="input is-fullwidth is-dark" required>
                             <br>
-                            <input type="text" name="description" placeholder="beskrivelse" class="input is-fullwidth" required>
+                            <input type="text" name="description" placeholder="Beskrivelse" class="input is-fullwidth is-dark" required>
                             <br>
-                            <input type="text" name="pictures" placeholder="url til bilde" class="input is-fullwidth" required>
+                            <input type="text" name="pictures" placeholder="Bildeurl" class="input is-fullwidth is-dark" required>
                             <br>
                             <div class="is-grouped is-pulled-right">
-                                <button type="submit" class="button is-link">
+                                <button type="submit" class="button is-dark">
                                     <span class="icon-text">
                                         <span class="icon">
                                             <ion-icon name="archive"></ion-icon>
                                         </span>
-                                        <span>Legg til</span>
+                                        <span>Publiser</span>
                                     </span>
                                 </button>
                             </div>

@@ -77,9 +77,5 @@ class When_authenticating(TestCase):
         self.assertNotIn("user_token", res.cookies.get_dict())
 
 
-    def test_buyer_can_sign_up(self):
-        pass
-
-
-    def test_seller_can_apply(self):
+    def test_user_can_sign_up(self):
         pass
