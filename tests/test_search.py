@@ -10,10 +10,6 @@ class When_searching(TestCase):
 
     @classmethod
     def setUpClass(cls):
-        app = None
-
-    @classmethod
-    def setUpClass(cls):
         cls.app = app
         cls.client = TestClient(cls.app)
 
