@@ -3,6 +3,8 @@ from fastapi import APIRouter, Request, Form
 from fastapi.param_functions import Depends
 from fastapi.responses import HTMLResponse
 from fastapi.exceptions import HTTPException
+from starlette.responses import RedirectResponse
+
 from ..dependencies import get_templates, get_repositories
 from ...core.entities.listing import Listing
 
@@ -64,10 +66,18 @@ async def read_listing_view(request: Request, id: str, templates = Depends(get_t
 
 
 @router.post("/api/listings/", tags=["listing", "api"])
-async def create_listing(title: str = Form(...), price: int = Form(...),
+async def create_listing(request: Request, title: str = Form(...), price: int = Form(...),
                          description: str = Form(...), pictures: List[str] = Form(...),
-                         repos = Depends(get_repositories)):
+                         repos=Depends(get_repositories)):
 
-    listing = Listing(title, price, description, pictures)
+    if request.state.current_user.get_class_name() != "Seller":
+        raise HTTPException(status_code=403)
+
+    listing = Listing(title, price, description, pictures, request.state.current_user.id)
 
     repos["listings"].create(listing)
+
+    response = RedirectResponse(url="/listings/")
+    response.status_code = 302
+
+    return response
