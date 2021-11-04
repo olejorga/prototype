@@ -67,6 +67,12 @@ class FileRepository(Repository):
 
         return results
 
+    
+    # OVERRIDE
+    def clear(self):
+        self.entities = []
+        self.save()
+
 
     def assign_id(self) -> str:
         id = uuid.uuid1()

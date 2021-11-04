@@ -26,3 +26,7 @@ class Repository:
 
     def search(self, key: int, value: any) -> List[Entity]:
         pass
+
+
+    def clear(self):
+        pass

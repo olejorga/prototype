@@ -1,5 +1,4 @@
 from unittest import TestCase
-from fastapi import Request
 from fastapi.testclient import TestClient
 from src.app.main import app
 from src.app.dependencies import get_current_user, get_repositories
@@ -10,14 +9,14 @@ from src.core.entities.seller import Seller
 
 
 class When_authenticating(TestCase):
-    app = None
 
-    @classmethod
-    def setUpClass(cls):
-        cls.app = app
-        cls.client = TestClient(cls.app)
+    def setUp(self):
+        self.client = TestClient(app)
+        self.fake_user_repo = PickleRepository("tests/data/users.dat")
 
-        cls.fake_admin = Admin(
+        self.fake_user_repo.clear()
+
+        self.fake_admin = Admin(
             username="enAdministrator",
             password="abc123456",
             email_address="admin@mail.com",
@@ -26,7 +25,7 @@ class When_authenticating(TestCase):
             last_name="Admin"
         )
 
-        cls.fake_buyer = Buyer(
+        self.fake_buyer = Buyer(
             username="enSluttBruker",
             password="abc123456",
             email_address="buyer@mail.com",
@@ -35,7 +34,7 @@ class When_authenticating(TestCase):
             last_name="Buyer"
         )
 
-        cls.fake_seller = Seller(
+        self.fake_seller = Seller(
             username="enForhandler",
             password="abc123456",
             email_address="seller@mail.com",
@@ -43,34 +42,44 @@ class When_authenticating(TestCase):
             company_name="Sellers Company Ltd"
         )
 
-    @classmethod
-    def tearDownClass(cls):
-        pass
+        self.fake_user_repo.create(self.fake_admin)
+        self.fake_user_repo.create(self.fake_buyer)
+        self.fake_user_repo.create(self.fake_seller)
 
-    def setUp(cls):
-        pass
-
-    def tearDown(cls):
-        pass
-
-    def test_any_legitimate_user_can_log_in(self):
         def fake_get_repositories():
             return {
-                "users": PickleRepository("tests/data/users.dat")
+                "users": self.fake_user_repo
             }
 
-        self.app.dependency_overrides[get_repositories] = fake_get_repositories
+        app.dependency_overrides[get_repositories] = fake_get_repositories
 
-        res = self.client.post("/api/users/login", {"username": self.fake_buyer.username,
-                                                    "password": self.fake_buyer.password})
+
+    def tearDown(self):
+        self.fake_user_repo.clear()
+
+
+    def test_user_can_log_in(self):
+        res = self.client.post("/api/users/login", {
+            "username": self.fake_buyer.username,
+            "password": self.fake_buyer.password
+        })
+
+        # Should be 200, but is 302 due to a redirect
+        # Is 403 if wrong credentials are submitted
+        self.assertEqual(res.status_code, 302)
+        self.assertIn("user_token", res.cookies.get_dict())
+
+
+    def test_user_can_log_out(self):
+        res = self.client.get("/api/users/logout")
 
         self.assertEqual(res.status_code, 200)
+        self.assertNotIn("user_token", res.cookies.get_dict())
 
-    def test_any_legitimate_user_can_log_out(self):
-        pass
 
     def test_buyer_can_sign_up(self):
         pass
+
 
     def test_seller_can_apply(self):
         pass

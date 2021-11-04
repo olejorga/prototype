@@ -13,11 +13,11 @@ class When_buying_a_listing(TestCase):
         pass
 
 
-    def setUp(cls):
+    def setUp(self):
         pass
 
 
-    def tearDown(cls):
+    def tearDown(self):
         pass
 
 

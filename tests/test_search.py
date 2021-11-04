@@ -13,11 +13,11 @@ class When_searching(TestCase):
         pass
 
 
-    def setUp(cls):
+    def setUp(self):
         pass
 
 
-    def tearDown(cls):
+    def tearDown(self):
         pass
 
 

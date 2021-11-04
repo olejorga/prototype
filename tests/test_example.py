@@ -14,11 +14,11 @@ class When_something(TestCase):
         pass
 
     # Runs before "each" test
-    def setUp(cls):
+    def setUp(self):
         pass
 
     # Runs after "each" test
-    def tearDown(cls):
+    def tearDown(self):
         pass
 
     # A test
