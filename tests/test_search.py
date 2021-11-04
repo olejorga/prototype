@@ -7,6 +7,7 @@ from src.app.dependencies import get_repositories
 
 
 class When_searching(TestCase):
+    app = None
 
     @classmethod
     def setUpClass(cls):
@@ -52,4 +53,11 @@ class When_searching(TestCase):
 
 
     def test_keyword_search(self):
-        pass
+        response =  self.client.get("/search", input={"input": "sofa"}, repos={"repos": "fake_listings_1"})
+        assert response.status_code == 200
+        assert response.json() == {
+            "title": "Sofa", 
+            "price": 15000, 
+            "description": "Antikk sofa fra 1890", 
+            "pictures": ""
+        }
