@@ -7,7 +7,7 @@
                     <div class="column">
                         <label class="checkbox">
                             <input type="checkbox">
-                            Alpabetisk rekkefølge
+                            Alpabetisk 
                         </label>
                     </div>
                     <div class="column">
@@ -25,13 +25,13 @@
                     <div class="column">
                         <label class="checkbox">
                             <input type="checkbox">
-                            Nyest antikvitet
+                            Nyest 
                         </label>
                     </div>
                     <div class="column">
                         <label class="checkbox">
                             <input type="checkbox">
-                            Eldste  antikvitet
+                            Eldste 
                         </label>
                     </div>
                 </aside>
@@ -58,6 +58,11 @@
                                     </div>
                                 </div>
                             </article>
+                            <form class="field has-addons" action="/api/listings/{{ listing.id }}" method="post">
+                                <div class="control">
+                                    <button type="submit" class="button is-medium is-light is-danger">slett anonse</button>
+                                </div>
+                            </form>
                         </article>
                     </div>
                 {% endfor %}

@@ -1,7 +1,7 @@
 from typing import List
 from fastapi import APIRouter, Request, Form
 from fastapi.param_functions import Depends
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, Response, RedirectResponse 
 from fastapi.exceptions import HTTPException
 from ..dependencies import get_templates, get_repositories
 from ...core.entities.listing import Listing
@@ -64,10 +64,39 @@ async def read_listing_view(request: Request, id: str, templates = Depends(get_t
 
 
 @router.post("/api/listings/", tags=["listing", "api"])
-async def create_listing(title: str = Form(...), price: int = Form(...),
+async def create_listing(request: Request, title: str = Form(...), price: int = Form(...),
                          description: str = Form(...), pictures: List[str] = Form(...),
                          repos = Depends(get_repositories)):
 
-    listing = Listing(title, price, description, pictures)
+    if request.state.current_user.get_class_name() != "Seller":
+        raise HTTPException(status_code=403)
+
+    listing = Listing(title, price, description, pictures, request.state.current_user.id)
 
     repos["listings"].create(listing)
+
+    response = RedirectResponse(url="/listings/")
+    response.status_code = 302
+
+    return response
+
+#hov to delete
+@router.get("/api/listings/{id}", tags=["listing", "api"])
+async def delete_listing(request: Request, id: str,
+                         repos = Depends(get_repositories)):
+
+    #user = request.status.curent_user
+
+    if request.state.current_user.get_class_name() != "Seller":
+        raise HTTPException(status_code=403)
+
+    listing = repos["listings"].find(id)
+   # listing = Response(listing)
+    repos["listings"].delete(listing)
+
+    response = RedirectResponse(url="/listings/")
+    response.status_code = 302
+
+    return Response
+
+

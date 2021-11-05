@@ -1,30 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
     <section class="section">
-        <form action="/api/receipt/{#{ new_listing.id }#}" method="set">
+        <form action="/api/listings/" enctype="multipart/form-data" method="post">
             <div class="field">
-                <p class="subtitle">{#{ listing.set_title() }ikke med noen av dem#} Titel</p>
+                <p class="subtitle">{#{ listing.get_title() }ikke med noen av dem#} Tittel</p>
                 <div class="control">
-                    <input class="input" type="text" placeholder="Titel: eks.Tesett">
+                    <input type="text" name="title" class="input"  placeholder="eks.Tesett">
                 </div>
             </div>
             <div class="field">
-                <p class="subtitle">{#{ listing.set_price() }#} Pris</p>
+                <p class="subtitle">{#{ }#} Pris</p>
                 <div class="control">
-                    <input class="input" type="text" placeholder="pris: NOK">
+                    <input type="text" name="price" class="input" placeholder="pris: NOK">
                 </div>
             </div>
             <div class="field">
-                <p class="subtitle">{#{ listing.set_description() } #} Beskrivelse</p>
+                <p class="subtitle">{#{ listing.get_description() } #} Beskrivelse</p>
                 <div class="control">
-                    <textarea class="textarea" placeholder="iformasjon om produktet"></textarea>
+                    <textarea type="text" name="description" class="textarea"  placeholder="iformasjon om produktet"></textarea>
                 </div>
             </div>
-            <div class="field">
-                <p class="subtitle">{#{ listing.set_pictures }#} Bilde </p>
+             <div class="field">
+                <p class="subtitle">{#{ listing.set_pictures }#} Bilde</p>
                 <div class="file has-name">
                     <label class="file-label">
-                      <input class="file-input" type="file" name="resume">
+                      <input class="file-input" type="file" name="" multiple>
                       <span class="file-cta">
                         <span class="file-icon">
                           <i class="fas fa-upload"></i>
@@ -34,14 +34,17 @@
                         </span>
                       </span>
                       <span class="file-name">
-                        filname.png/jpg
+                        filname.png/jpg{#{% %}#}
                       </span>
                     </label>
                 </div>
-            </div>
+                <div>  
+                    <input class="column is-one-quarter" type="text" name="pictures" class="input" placeholder="URL">
+                </div>
+            </div> 
             <div class="control">
                 <button class="button is-success">post anonse</button>
-            </div>
+            </div> 
         </form>
     </section>
 {% endblock %}

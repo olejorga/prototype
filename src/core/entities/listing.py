@@ -6,7 +6,7 @@ from .entity import Entity
 class Listing(Entity):
 
     def __init__(self, title: str, price: int, description: str, 
-                 pictures: List[str]):
+                 pictures: List[str], user_id: str):
 
         self.set_title(title)
         self.set_price(price)
