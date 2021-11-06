@@ -20,7 +20,7 @@ async def read_receipt_view(request: Request, templates = Depends(get_templates)
     return templates.TemplateResponse("receipts.html", {
         "request": request,
         "title": "Kvittering",
-        "receipts": repos["receipts"].read()
+        "receipts": repos["receipts"].search("user_id", user.id)
     })
 
 
@@ -35,7 +35,7 @@ async def read_receipt(request: Request, id: str, templates = Depends(get_templa
     })
 
 
-@router.post("/api/receipts/{id}", tags=["receipts", "api"])
+@router.get("/api/receipts/{id}", tags=["receipts", "api"])
 async def create_receipt(response: Response, request: Request, id: str,
                          repos = Depends(get_repositories)):
 
@@ -64,7 +64,7 @@ async def goto_checkout(response: Response, request: Request, id: str):
     
     # PAYMENT HANDLER CODES
 
-    response = RedirectResponse(url="/api/receipt/"+id)
+    response = RedirectResponse(url="/api/receipts/"+id)
     response.status_code = 302
     
     return response

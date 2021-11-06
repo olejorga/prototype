@@ -97,11 +97,11 @@ class When_buying_a_listing(TestCase):
 
         listing_id = self.fake_listing_repo.entities[0].id
 
-        res = self.client.post("/api/receipts/" + listing_id)
+        res = self.client.get("/api/receipts/" + listing_id)
 
         receipts = self.fake_receipts_repo.search("user_id", "dummy_id")
 
-        self.assertEqual(res.status_code, 302)
+        self.assertEqual(res.status_code, 200)
         self.assertGreater(len(receipts), 0)
 
 
@@ -115,7 +115,7 @@ class When_buying_a_listing(TestCase):
 
         listing_id = self.fake_listing_repo.entities[0].id
 
-        res = self.client.post("/api/receipts/" + listing_id)
+        res = self.client.get("/api/receipts/" + listing_id)
 
         receipts = self.fake_receipts_repo.search("user_id", "dummy_id")
 
