@@ -11,9 +11,9 @@ class Test_entity_validation(TestCase):
         pass
 
 
-    def test_something(self):
+    def test_listing_title(self):
         pass
 
 
-    def test_something_other_thing(self):
+    def test_listing_price(self):
         pass
