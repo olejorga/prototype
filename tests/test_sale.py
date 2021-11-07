@@ -4,7 +4,6 @@ from fastapi.testclient import TestClient
 from src.app.main import app
 from src.app.dependencies import get_repositories, get_current_user
 from src.app.models.pickle_repository import PickleRepository
-from src.core.repositories.repository import Repository as DummyRepository
 from src.core.entities.sale import Sale
 from src.core.entities.buyer import Buyer
 from src.core.entities.seller import Seller
