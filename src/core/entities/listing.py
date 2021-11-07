@@ -20,7 +20,7 @@ class Listing(Entity):
 
 
     def set_title(self, new_title: str):
-        regex = "[A-Za-z0-9-_\s]{1,}"
+        regex = "[A-Za-z0-9\s]{1,}"
 
         if not re.fullmatch(regex, new_title):
             raise ValueError("Invalid title")
@@ -33,7 +33,7 @@ class Listing(Entity):
 
 
     def set_price(self, new_price: int):
-        if new_price <= 0:
+        if new_price < 0:
             raise ValueError("Invalid price")
 
         self.price = new_price
