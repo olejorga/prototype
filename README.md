@@ -1,5 +1,5 @@
 # Prototype
-A MVP prototype for a antiques marketplace - part of a group project in SE and testing at HiØ
+A MVP prototype for a antiques marketplace - part of a group project in SE and testing at HiØ, written with love in python <3
 
 ## Authors
 - Erik Teien Jarem [@eriktja](https://www.github.com/eriktja)
