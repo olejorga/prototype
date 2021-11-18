@@ -1,0 +1,2 @@
+cd ..
+pipenv run tests
