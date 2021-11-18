@@ -19,7 +19,7 @@ A MVP prototype for a antiques marketplace - part of a group project in SE and t
 ### Advanced
 To get the prototype set up, follow the instructions below
 
-1: Clone and cd into the repository
+1: Clone and cd into the repository (if you don't have it already)
 
 ```bash
   git clone https://github.com/olejorga/prototype.git
