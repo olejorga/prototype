@@ -1,31 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
     <section class="section">
-        <article class="columns">
-            <div class="column">
-                <figure class="image is-4by3 has-background-white">
-                    <img src="{{ listing.get_pictures()[0] }}" alt="{{ listing.get_title() }}" class="keeps-aspect-ratio">
-                </figure>
-            </div>
-            <div class="column">
-                <h1 class="title is-1">{{ listing.get_title() }}</h1>
-                <h2 class="subtitle is-1 has-text-weight-bold has-text-grey">{{ listing.get_price() }} kr</h2>
-                <ul class="mb-6">
-                    <li class="my-2">
-                        <!-- Listing property list -->
-                    </li>
-                </ul>
-                <p class="block">{{ listing.get_description() }}</p>
-                <form class="field has-addons" action="/api/checkout/{{ listing.id }}" method="post">
-                    <div class="control">
-                        {% if request.state.current_user and (request.state.current_user.get_class_name() in ["Buyer"]) %}
-                            <button type="submit" class="button is-medium is-light is-success">Kjøp</button>
-                        {% else %}
-                            <button type="submit" class="button is-medium is-light is-static" disabled>Kjøp</button>
-                        {% endif %}
-                    </div>
-                </form>
-            </div>
-        </article>
+        {% if listing is not none %}
+            <article class="columns">
+                <div class="column">
+                    <figure class="image is-4by3 has-background-white">
+                        <img src="{{ listing.get_pictures()[0] }}" alt="{{ listing.get_title() }}" class="keeps-aspect-ratio">
+                    </figure>
+                </div>
+                <div class="column">
+                    <h1 class="title is-1">{{ listing.get_title() }}</h1>
+                    <h2 class="subtitle is-1 has-text-weight-bold has-text-grey">{{ listing.get_price() }} kr</h2>
+                    <ul class="mb-6">
+                        <li class="my-2">
+                            <!-- Listing property list -->
+                        </li>
+                    </ul>
+                    <p class="block">{{ listing.get_description() }}</p>
+                    <form class="field has-addons" action="/api/checkout/{{ listing.id }}" method="post">
+                        <div class="control">
+                            {% if request.state.current_user and (request.state.current_user.get_class_name() in ["Buyer"]) %}
+                                <button type="submit" class="button is-medium is-light is-success">Kjøp</button>
+                            {% else %}
+                                <button type="submit" class="button is-medium is-light is-static" disabled>Kjøp</button>
+                            {% endif %}
+                        </div>
+                    </form>
+                </div>
+            </article>
+        {% else %}
+            <h1 class="title">Ooops... Fant ikke annonsen du leter etter...</h1>
+        {% endif %}
     </section>
 {% endblock %}

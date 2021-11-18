@@ -102,6 +102,7 @@ class When_buying_a_listing(TestCase):
 
         self.assertEqual(res.status_code, 200)
         self.assertGreater(len(receipts), 0)
+        self.assertEqual(len(self.fake_listing_repo.entities), 0)
 
 
     def test_seller_can_not_place_order(self):
@@ -120,7 +121,7 @@ class When_buying_a_listing(TestCase):
 
         self.assertEqual(res.status_code, 403)
         self.assertEqual(len(receipts), 0)
-
+    
 
     def test_payment_process(self):
         #TODO: Waiting for a payment handler ;)

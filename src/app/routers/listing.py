@@ -60,7 +60,7 @@ async def read_listing_view(request: Request, id: str, templates = Depends(get_t
 
     return templates.TemplateResponse("listing.html", {
         "request": request,
-        "title": listing.get_title(),
+        "title": listing.get_title() if listing is not None else "Error!",
         "listing": listing
     })
 

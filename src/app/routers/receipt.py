@@ -48,6 +48,8 @@ async def create_receipt(response: Response, request: Request, id: str,
     receipt = Receipt(listing, user.id)
     repos["receipts"].create(receipt)
 
+    listing = repos["listings"].delete(id)
+
     response = RedirectResponse(url="/receipts/")
     response.status_code = 302
     
@@ -62,7 +64,7 @@ async def goto_checkout(response: Response, request: Request, id: str):
     if user is None or user.get_class_name() != "Buyer":
         raise HTTPException(status_code = 403)
     
-    # PAYMENT HANDLER CODES
+    # PAYMENT HANDLER CODE
 
     response = RedirectResponse(url="/api/receipts/"+id)
     response.status_code = 302
