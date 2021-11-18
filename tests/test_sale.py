@@ -121,8 +121,3 @@ class When_buying_a_listing(TestCase):
 
         self.assertEqual(res.status_code, 403)
         self.assertEqual(len(receipts), 0)
-    
-
-    def test_payment_process(self):
-        #TODO: Waiting for a payment handler ;)
-        pass

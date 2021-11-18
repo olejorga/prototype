@@ -75,7 +75,3 @@ class When_authenticating(TestCase):
 
         self.assertEqual(res.status_code, 200)
         self.assertNotIn("user_token", res.cookies.get_dict())
-
-
-    def test_user_can_sign_up(self):
-        pass
