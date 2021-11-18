@@ -6,7 +6,7 @@ from src.core.entities.entity import Entity
 class Test_pickle_repository(TestCase):
 
     def setUp(self):
-        self.repo = PickleRepository("tests/data/users.dat")
+        self.repo = PickleRepository("tests/dummy_data/users.dat")
         self.repo.entities = []
 
         self.fake_entity = Entity()

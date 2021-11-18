@@ -12,7 +12,7 @@ class When_authenticating(TestCase):
 
     def setUp(self):
         self.client = TestClient(app)
-        self.fake_user_repo = PickleRepository("tests/data/users.dat")
+        self.fake_user_repo = PickleRepository("tests/dummy_data/users.dat")
 
         self.fake_user_repo.clear()
 

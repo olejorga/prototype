@@ -10,7 +10,7 @@ class When_searching(TestCase):
 
     def setUp(self):
         self.client = TestClient(app)
-        self.fake_listing_repo = PickleRepository("tests/data/listings.dat")
+        self.fake_listing_repo = PickleRepository("tests/dummy_data/listings.dat")
 
         self.fake_listing_repo.clear()
 
