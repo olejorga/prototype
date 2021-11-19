@@ -9,15 +9,13 @@ from src.core.entities.buyer import Buyer
 from src.core.entities.seller import Seller
 
 
-class When_buying_a_listing(TestCase):
+class When_creating_a_listing(TestCase):
 
     def setUp(self):
         self.client = TestClient(app)
         self.fake_listing_repo = PickleRepository("tests/dummy_data/listings.dat")
-        self.fake_receipts_repo = PickleRepository("tests/dummy_data/receipts.dat")
 
         self.fake_listing_repo.clear()
-        self.fake_receipts_repo.clear()
 
         self.fake_buyer = Buyer(
             username="enSluttBruker",
@@ -44,12 +42,9 @@ class When_buying_a_listing(TestCase):
             user_id=""
         )
 
-        self.fake_listing_repo.create(self.fake_sale)
-
         def fake_get_repositories():
             return {
-                "listings": self.fake_listing_repo,
-                "receipts": self.fake_receipts_repo
+                "listings": self.fake_listing_repo
             }
 
         app.dependency_overrides[get_repositories] = fake_get_repositories
@@ -57,59 +52,31 @@ class When_buying_a_listing(TestCase):
 
     def tearDown(self):
         self.fake_listing_repo.clear()
-        self.fake_receipts_repo.clear()
 
 
-    def test_buyer_can_access_checkout(self):
-        async def fake_get_current_user(request: Request):
-            request.state.current_user = self.fake_buyer
-        
-        app.dependency_overrides[get_current_user] = fake_get_current_user
-
-        listing_id = self.fake_listing_repo.entities[0].id
-
-        res = self.client.post("/api/checkout/" + listing_id)
-
-        self.assertEqual(res.status_code, 302)
-
-
-    def test_seller_can_not_access_checkout(self):
+    def test_seller_can_access_creation_page(self):
         async def fake_get_current_user(request: Request):
             request.state.current_user = self.fake_seller
         
         app.dependency_overrides[get_current_user] = fake_get_current_user
 
-        listing_id = self.fake_listing_repo.entities[0].id
+        res = self.client.get("/listings/new/")
 
-        res = self.client.post("/api/checkout/" + listing_id)
-
-        self.assertEqual(res.status_code, 403)
+        self.assertEqual(res.status_code, 200)
 
 
-    def test_buyer_can_place_order(self):
-        self.fake_buyer.id = "dummy_id"
-
+    def test_buyer_can_not_access_creation_page(self):
         async def fake_get_current_user(request: Request):
             request.state.current_user = self.fake_buyer
         
         app.dependency_overrides[get_current_user] = fake_get_current_user
 
-        listing_id = self.fake_listing_repo.entities[0].id
+        res = self.client.get("/listings/new/")
 
-        # Check with payment handler
-        payment_handler_res = lambda req : True
-
-        res = self.client.get("/api/receipts/" + listing_id)
-
-        receipts = self.fake_receipts_repo.search("user_id", "dummy_id")
-
-        self.assertEqual(res.status_code, 200)
-        self.assertGreater(len(receipts), 0)
-        self.assertEqual(len(self.fake_listing_repo.entities), 0)
-        self.assertTrue(payment_handler_res)
+        self.assertEqual(res.status_code, 403)
 
 
-    def test_seller_can_not_place_order(self):
+    def test_seller_can_create_sale(self):
         self.fake_seller.id = "dummy_id"
 
         async def fake_get_current_user(request: Request):
@@ -117,11 +84,23 @@ class When_buying_a_listing(TestCase):
         
         app.dependency_overrides[get_current_user] = fake_get_current_user
 
-        listing_id = self.fake_listing_repo.entities[0].id
 
-        res = self.client.get("/api/receipts/" + listing_id)
+        res = self.client.post("/api/listings/", self.fake_sale.__dict__)
 
-        receipts = self.fake_receipts_repo.search("user_id", "dummy_id")
+        self.assertEqual(res.status_code, 302)
+        self.assertEqual(len(self.fake_listing_repo.entities), 1)
+        self.assertEqual(self.fake_listing_repo.entities[0].user_id, self.fake_seller.id)
+
+
+    def test_buyer_can_not_create_sale(self):
+        self.fake_buyer.id = "dummy_id"
+
+        async def fake_get_current_user(request: Request):
+            request.state.current_user = self.fake_buyer
+        
+        app.dependency_overrides[get_current_user] = fake_get_current_user
+
+        res = self.client.post("/api/listings/", self.fake_sale.__dict__)
 
         self.assertEqual(res.status_code, 403)
-        self.assertEqual(len(receipts), 0)
+        self.assertEqual(len(self.fake_listing_repo.entities), 0)
