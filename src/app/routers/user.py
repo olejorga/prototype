@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Form, Depends
+from fastapi import APIRouter, Form, Depends, Request
 from fastapi.responses import Response, RedirectResponse
 from fastapi.exceptions import HTTPException
 from ..dependencies import get_repositories
@@ -35,3 +35,12 @@ async def logout_user(response: Response):
     response.delete_cookie("user_token")
 
     return response
+
+
+@router.delete("/api/users/", tags=["user", "api"])
+async def delete_user(request: Request, id: str, repos=Depends(get_repositories)):
+
+    if request.state.current_user.get_class_name() != "Admin":
+        raise HTTPException(status_code=403)
+
+    repos["users"].delete(id)

@@ -8,7 +8,7 @@ from ...core.entities.receipt import Receipt
 router = APIRouter()
 
 
-@router.get("/receipts/", tags=["receipts", "view"], response_class=HTMLResponse)
+@router.get("/receipts/", tags=["receipt", "view"], response_class=HTMLResponse)
 async def read_receipt_view(request: Request, templates = Depends(get_templates), 
                             repos = Depends(get_repositories)):
 
@@ -35,7 +35,7 @@ async def read_receipt(request: Request, id: str, templates = Depends(get_templa
     })
 
 
-@router.get("/api/receipts/{id}", tags=["receipts", "api"])
+@router.get("/api/receipts/{id}", tags=["receipt", "api"])
 async def create_receipt(response: Response, request: Request, id: str,
                          repos = Depends(get_repositories)):
 
@@ -56,7 +56,7 @@ async def create_receipt(response: Response, request: Request, id: str,
     return response
 
 
-@router.post("/api/checkout/{id}", tags=["receipts", "api"])
+@router.post("/api/checkout/{id}", tags=["receipt", "api"])
 async def goto_checkout(response: Response, request: Request, id: str):
 
     user = request.state.current_user
@@ -70,3 +70,12 @@ async def goto_checkout(response: Response, request: Request, id: str):
     response.status_code = 302
     
     return response
+
+
+@router.delete("/api/receipts/", tags=["receipt", "api"])
+async def delete_receipt(request: Request, id: str, repos=Depends(get_repositories)):
+
+    if request.state.current_user.get_class_name() != "Admin":
+        raise HTTPException(status_code=403)
+
+    repos["receipts"].delete(id)

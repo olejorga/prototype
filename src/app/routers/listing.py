@@ -81,3 +81,12 @@ async def create_listing(request: Request, title: str = Form(...), price: int = 
     response.status_code = 302
 
     return response
+
+
+@router.delete("/api/listings/", tags=["listing", "api"])
+async def delete_listing(request: Request, id: str, repos=Depends(get_repositories)):
+
+    if request.state.current_user.get_class_name() != "Admin":
+        raise HTTPException(status_code=403)
+
+    repos["listings"].delete(id)
