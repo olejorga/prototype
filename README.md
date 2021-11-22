@@ -11,12 +11,6 @@ A MVP prototype for a antiques marketplace - part of a group project in SE and t
 ## Installation
 > You need the latest, "cutting edge", version of [Python](https://www.python.org) installed (3.8+)
 
-### Easy
-1: Open the "prototype" folder and doubleclick the `install` file, to install the application
-
-2: When the installation is complete, doubleclick the `start` file, to start the application
-
-### Advanced
 To get the prototype set up, follow the instructions below
 
 1: Clone and cd into the repository (if you don't have it already)
@@ -54,10 +48,7 @@ To get the prototype set up, follow the instructions below
 ```
 
 ## Running tests
-### Easy
-Open the "prototype" folder and doubleclick the `test` file, to run tests
 
-### Advanced
 To run tests, run the following command
 
 ```bash
